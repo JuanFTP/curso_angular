@@ -93,6 +93,9 @@ npm unistall mongoose --save
 INSTALAR LAS DEPENDENCIAS (Las contenidas dentro de package.json)
 npm install
 
+EJECUTAR EL Servidor
+npm start
+
 1.- Conectar la base de datos
 'use strict'
 
