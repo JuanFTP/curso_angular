@@ -2,8 +2,9 @@
 
 var mongoose = require('mongoose');
 var app = require('./app');
-var port = process.env.PORT || 3997;
+var port = process.env.PORT || 1024;
 
+mongoose.Promise = global.Promise;
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect('mongodb://localhost:27017/curso_mean2',

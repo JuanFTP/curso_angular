@@ -138,3 +138,6 @@ module.exports = app;
 
 DEFINIR LOS MODELOS QUE TENDRÁ LA API REST
 MODELO: Representación de una entidad de la base de datos.
+
+CONTROLADOR
+Intermediario entre el usuario y la Base de Datos
