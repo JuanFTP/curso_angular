@@ -16,6 +16,9 @@ show collections
 - Muestra todo el contenido de una colección
 db.name.find()
 
+- Elimina todos los documentos de una colección
+db.users.remove({});
+
 CREAR PROYECTOS
 Crear el proyecto en Node, moverse al directorio y hacer lo siguiente
 > npm init
