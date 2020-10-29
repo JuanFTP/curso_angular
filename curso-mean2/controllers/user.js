@@ -1,8 +1,11 @@
 'use-strict'
 
+var fs = require('fs');
+var path = require('path');
 var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
 var jwt = require('../services/jwt');
+
 
 function pruebas(req, res){
 	res.status(200).send({message: "Probando una acción del controlador del Usuario del API REST con Node y MongoDB"});
@@ -128,10 +131,26 @@ function uploadImage(req, res) {
 	}
 }
 
+function getImageFile(req, res) {
+	var imageFile = req.params.imageFile;
+	var path_file = './uploads/users/'+imageFile;
+	
+	fs.open(path_file, 'r', (err, fd) => {
+		if(err) {
+			if (err.code === 'ENOENT') {
+				res.status(200).send({message:'No existe la imagen'});
+			}
+		} else {
+			res.sendFile(path.resolve(path_file));
+		}
+	});
+}
+
 module.exports = {
 	pruebas,
 	saveUser,
 	loginUser,
 	updateUser,
-	uploadImage
+	uploadImage,
+	getImageFile
 };

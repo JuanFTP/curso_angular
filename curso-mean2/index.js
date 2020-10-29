@@ -7,6 +7,7 @@ var port = process.env.PORT || 1024;
 mongoose.Promise = global.Promise;
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
 mongoose.connect('mongodb://localhost:27017/curso_mean2',
 (err, res) => {
 	if(err) {
