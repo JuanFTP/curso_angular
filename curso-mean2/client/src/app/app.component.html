@@ -13,14 +13,20 @@
 	<div *ngIf="!identity" class="row my-5">
 		<div class="col-lg-6">
 			<h2>Identifícate</h2>
-			<form action="#" class="col-md">
+			<form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md">
 				<p>
-					<label for="">Correo electrónico</label>
-					<input type="text" name="log-email" id="log-email" class="form-control" placeholder="email@company.com" required>
+					<label for="log_email">Correo electrónico</label>
+					<input type="email" #log_email="ngModel" name="log_email" id="log_email" [(ngModel)]="user.email" class="form-control" placeholder="email@company.com" required>
+					<span *ngIf="!log_email.valid && log_email.touched" class="text-danger">
+						Email requerido
+					</span>
 				</p>
 				<p>
-					<label for="">Contraseña</label>
-					<input type="password" name="log-pass" id="log-pass" class="form-control" placeholder="password" required>
+					<label for="log_password">Contraseña</label>
+					<input type="password" #log_password="ngModel" name="log_password" id="log_password" [(ngModel)]="user.password" class="form-control" placeholder="password" required>
+					<span *ngIf="!log_password.valid && log_password.touched" class="text-danger">
+						Contraseña requerida
+					</span>
 				</p>
 				<button type="submit" class="btn btn-primary" value="Entrar">Entrar</button>
 			</form>
