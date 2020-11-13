@@ -1,12 +1,33 @@
-<div class="container">
-	<div class="row">
-		<div *ngIf="identity" class="navigation col-lg-11">
-			<h1>{{title}}</h1>
-		</div>
-		
-		<div *ngIf="identity" class="central col-lg-11">
-			<p>Estás logueado en la aplicación</p>
-		</div>
+<div class="container-fluid">
+	<div *ngIf="identity" class="row">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 shadow-sm p-3 mb-5 bg-white rounded">
+			<a class="navbar-brand" href="#">{{title}}</a>
+			<div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Reciente</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Albumes</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Artistas</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Canciones</a>
+					</li>
+					<li class="nav-item dropdown dropleft">
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+							aria-expanded="false">{{identity.name}} {{identity.surname}}</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">Cuenta</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="#" (click)="logout()">Salir</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
 	</div>
 	
 	<div *ngIf="!identity" class="row my-5">
