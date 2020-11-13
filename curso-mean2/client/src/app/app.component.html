@@ -1,9 +1,8 @@
 <div class="container">
 	<div class="row">
-		<div *ngIf="identity" class="navigation col-lg-1">
+		<div *ngIf="identity" class="navigation col-lg-11">
 			<h1>{{title}}</h1>
 		</div>
-		<div class="clearfix"></div>
 		
 		<div *ngIf="identity" class="central col-lg-11">
 			<p>Estás logueado en la aplicación</p>
@@ -13,6 +12,9 @@
 	<div *ngIf="!identity" class="row my-5">
 		<div class="col-lg-6">
 			<h2>Identifícate</h2>
+			<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+				{{errorMessage}}
+			</div>
 			<form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md">
 				<p>
 					<label for="log_email">Correo electrónico</label>
