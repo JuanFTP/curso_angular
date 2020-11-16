@@ -58,7 +58,7 @@ function loginUser(req, res) {
 
 	User.findOne({email: email.toLowerCase()}, (err, user) => {
 		if(err) {
-			res.status(500).send({message:'Error en la patición'});
+			res.status(500).send({message:'Error en la petición'});
 		} else {
 			if(!user) {
 				res.status(404).send({message:'El usuario no existe'});
@@ -69,9 +69,9 @@ function loginUser(req, res) {
 						// Devolver los datos del usuario logueado
 						if(params.gethash) {
 							// Devolver un token de JWT para autenticar al usuario
-							res.status(200).send({token: jwt.createToken(user)});
+							res.status(200).send({message: 'gethash true', token: jwt.createToken(user)});
 						} else {
-							res.status(200).send({message: 'getHash false', user});
+							res.status(200).send({message: 'gethash false', user});
 						}
 					} else {
 						res.status(404).send({message:'El usuario no ha podido loguearse'});

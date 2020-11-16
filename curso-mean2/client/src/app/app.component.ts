@@ -24,15 +24,12 @@ export class AppComponent implements OnInit {
 	public ngOnInit() {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
-
-		console.log(this.identity);
-		console.log(this.token);
 	}
 
 	public onSubmit() {
 		// Conseguir los datos del usuario identificado
 		this._userService.signup(this.user, null).subscribe(
-			res => {
+			(res : any) => {
 				let identity = res.user;
 				this.identity = identity;
 
@@ -44,7 +41,7 @@ export class AppComponent implements OnInit {
 
 					// Conseguir el token para enviarselo a cada petición HTTP
 					this._userService.signup(this.user, 'true').subscribe(
-						res => {
+						(res : any) => {
 							let token = res.token;
 							this.token = token;
 
@@ -55,11 +52,11 @@ export class AppComponent implements OnInit {
 								localStorage.setItem('token', token);
 
 								// Conseguir el token para enviarselo a cada petición HTTP
-								console.log(token);
-								console.log(identity);
+								/*console.log(token);
+								console.log(identity);*/
 							}
 						},
-						err => {
+						(err : any) => {
 							var errorMessage = <any>err;
 							
 							if(errorMessage != null) {
@@ -69,7 +66,7 @@ export class AppComponent implements OnInit {
 					);
 				}
 			},
-			err => {
+			(err : any) => {
 				var errorMessage = <any>err;
 				
 				if(errorMessage != null) {
