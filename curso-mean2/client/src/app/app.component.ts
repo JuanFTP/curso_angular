@@ -12,12 +12,14 @@ export class AppComponent implements OnInit {
 	public title = 'MusicFy!';
 	public user: User;
 	public user_register: User;
-	public identity;
-	public token;
-	public errorMessage;
+	public identity: User;
+	public token: string;
+	public errorLogin: string;
+	public typeRegisterMessage: string = "alert-danger";
+	public alertRegister: string;
 
 	public constructor(
-		private _userService:UserService
+		private _userService: UserService
 	){
 		this.user = new User('', '', '', '', '', 'ROLE_USER', '');
 		this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit {
 				this.identity = identity;
 
 				if(!this.identity._id) {
-					this.errorMessage = "El usuario no está correctamente logueado";
+					this.errorLogin = "El usuario no está correctamente logueado";
 				} else {
 					// Crear sesión en el LocalStorage para tener al usuario en sesión
 					localStorage.setItem('identity', JSON.stringify(identity));
@@ -48,31 +50,28 @@ export class AppComponent implements OnInit {
 							this.token = token;
 
 							if(this.token.length <= 0) {
-								this.errorMessage = "El token no se ha generado";
+								this.errorLogin = "El token no se ha generado";
 							} else {
 								// Crear sesión en el LocalStorage para tener al usuario en sesión
 								localStorage.setItem('token', token);
-
-								// Conseguir el token para enviarselo a cada petición HTTP
-								/*console.log(token);
-								console.log(identity);*/
+								this.user = new User('', '', '', '', '', 'ROLE_USER', '');
 							}
 						},
 						(err : any) => {
-							var errorMessage = <any>err;
+							var errorLogin = <any>err;
 							
-							if(errorMessage != null) {
-								this.errorMessage = err.error.message;
+							if(errorLogin != null) {
+								this.errorLogin = err.error.message;
 							}
 						}
 					);
 				}
 			},
 			(err : any) => {
-				var errorMessage = <any>err;
+				var errorLogin = <any>err;
 				
-				if(errorMessage != null) {
-					this.errorMessage = err.error.message;
+				if(errorLogin != null) {
+					this.errorLogin = err.error.message;
 				}
 			}
 		);
@@ -87,6 +86,27 @@ export class AppComponent implements OnInit {
 	}
 
 	public onSubmitRegister() {
-		console.log(this.user_register);
+		this._userService.register(this.user_register).subscribe(
+			(res : any) => {
+				let user = res.user;
+				this.user_register = user;
+				if(this.user._id == null) {
+					this.alertRegister = "No se ha registrado el usuario";
+					this.typeRegisterMessage = "alert-danger";
+				} else {
+					this.alertRegister = "El registro se ha completado correctamente, accede con tu email: "+this.user_register.email;
+					this.typeRegisterMessage = "alert-success";
+					this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+				}
+			},
+			(err : any) => {
+				var errorLogin = <any>err;
+				
+				if(errorLogin != null) {
+					this.alertRegister = err.error.message;
+					this.typeRegisterMessage = "alert-danger";
+				}
+			}
+		);
 	}
 }

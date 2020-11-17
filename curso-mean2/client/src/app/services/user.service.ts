@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GLOBAL } from './global';
 import { map } from 'rxjs/operators';
+import { User } from '../models/user';
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,7 @@ export class UserService {
 		this.url = GLOBAL.url;
 	}
 
-	signup(user_to_login, gethash) {
+	public signup(user_to_login, gethash) {
 		if(gethash != null) {
 			user_to_login.gethash = gethash;
 		}
@@ -27,7 +28,15 @@ export class UserService {
 		.pipe(map(res => res));
 	}
 
-	getIdentity() {
+	public register(user_to_register) {
+		let params = JSON.stringify(user_to_register);
+
+		let headers = new HttpHeaders({'Content-Type':'application/json'});
+		return this._http.post(this.url+'register', params, { headers: headers })
+		.pipe(map(res => res));
+	}
+
+	public getIdentity() {
 		let identity = JSON.parse(localStorage.getItem('identity'));
 		if(identity != "undefined") {
 			this.identity = identity;
@@ -38,7 +47,7 @@ export class UserService {
 		return  this.identity;
 	}
 
-	getToken() {
+	public getToken() {
 		let token = localStorage.getItem('token');
 		if(token != "undefined") {
 			this.token = token;

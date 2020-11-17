@@ -20,7 +20,7 @@ function saveUser(req, res) {
 	user.name = params.name;
 	user.surname = params.surname;
 	user.email = params.email;
-	user.role = 'ROLE_ADMIN';
+	user.role = params.role;
 	user.image = 'null';
 
 	if(params.password) {
@@ -36,7 +36,7 @@ function saveUser(req, res) {
 						if(!userStored) {
 							res.status(404).send({message: 'No se ha podido guardar el usuario'});
 						} else {
-							res.status(200).send({message: userStored});
+							res.status(200).send({message: 'Usuario registrado correctamente', user: userStored});
 						}
 					}
 				});

@@ -34,7 +34,7 @@
 
 	<div class="container">
 		<div class="row">
-			<p>1Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere consequuntur sit quaerat enim? Consequuntur sed pariatur quo saepe architecto tempore, placeat laudantium veritatis error dignissimos, qui autem, minima aspernatur ratione?</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere consequuntur sit quaerat enim? Consequuntur sed pariatur quo saepe architecto tempore, placeat laudantium veritatis error dignissimos, qui autem, minima aspernatur ratione?</p>
 			<p>Quis ut sunt eum provident nobis? Quasi optio, ut deserunt accusantium quibusdam voluptatibus consequuntur voluptates, atque repellendus perferendis aspernatur consectetur autem nobis sed reprehenderit rerum vitae nostrum quas eveniet illum.</p>
 			<p>Esse tenetur itaque adipisci autem labore asperiores sapiente deserunt tempora, officiis in nostrum obcaecati quam repellendus temporibus rerum sunt hic maxime rem dolorum tempore quae nisi. Mollitia facilis quisquam labore?</p>
 			<p>Animi rem amet sapiente accusantium tempore odio ipsa ipsum maxime, sequi quas quaerat non autem eaque, corrupti cum quo magnam ratione veniam natus itaque veritatis ut placeat architecto consequuntur. Voluptatibus.</p>
@@ -140,10 +140,26 @@
 
 <div *ngIf="!identity" class="container">
 	<div class="row my-5">
+		<div class="card">
+			<div class="row no-gutters">
+				<div class="col-lg-4">
+					<img src="./../assets/img/home_banner.jpg" class="card-img" alt="...">
+				</div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h5 class="card-title">¡Hola, bienvenido!</h5>
+						<p class="card-text">Este es un proyecto desarrollado através de un Curso de Desarrollo Web con Angular, Mongo DB y MinStack.</p>
+						<p class="card-text"><small class="text-muted">Inicia sesión para acceder a la aplicación o registrate si aún no tienes una cuenta.</small></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row my-5">
 		<div class="col-lg-6">
 			<h2>Identifícate</h2>
-			<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-				{{errorMessage}}
+			<div *ngIf="errorLogin" class="alert alert-danger" role="alert">
+				{{errorLogin}}
 			</div>
 			<form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md">
 				<p>
@@ -160,11 +176,15 @@
 						Contraseña requerida
 					</span>
 				</p>
-				<button type="submit" class="btn btn-primary" value="Entrar">Entrar</button>
+				<button type="submit" class="btn btn-success" value="Entrar">Entrar</button>
 			</form>
 		</div>
+		
 		<div class="col-lg-6">
 			<h2>Regístrate</h2>
+			<div *ngIf="alertRegister" class="alert {{typeRegisterMessage}}" role="alert">
+				{{alertRegister}}
+			</div>
 			<form #registerForm="ngForm" (ngSubmit)="onSubmitRegister()" class="col-md">
 				<p>
 					<label for="reg_name">Nombre (s)</label>
