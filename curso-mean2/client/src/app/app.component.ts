@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { GLOBAL } from './services/global';
 
 @Component({
 	selector: 'app-root',
@@ -17,12 +18,14 @@ export class AppComponent implements OnInit {
 	public errorLogin: string;
 	public typeRegisterMessage: string = "alert-danger";
 	public alertRegister: string;
+	public url: string;
 
 	public constructor(
 		private _userService: UserService
 	){
 		this.user = new User('', '', '', '', '', 'ROLE_USER', '');
 		this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
+		this.url = GLOBAL.url;
 	}
 
 	public ngOnInit() {
@@ -95,7 +98,7 @@ export class AppComponent implements OnInit {
 					this.typeRegisterMessage = "alert-danger";
 				} else {
 					this.alertRegister = "El registro se ha completado correctamente, accede con tu email: "+this.user_register.email;
-					this.typeRegisterMessage = "alert-success";
+					this.typeRegisterMessage = "alert-info";
 					this.user_register = new User('', '', '', '', '', 'ROLE_USER', '');
 				}
 			},

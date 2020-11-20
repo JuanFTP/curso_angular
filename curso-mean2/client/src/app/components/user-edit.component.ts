@@ -53,12 +53,15 @@ export class UserEditComponent implements OnInit {
 							(result : any) => {
 								this.user.image = result.image;
 								localStorage.setItem('identity', JSON.stringify(this.user));
+
+								let image_path: string = this.url+"get-image-user/"+this.user.image;
+								document.getElementById('avatar_header_usuario').setAttribute('src', image_path);
 							}
 						);
 					}
 
 					this.alertUpdate = res.message;
-					this.typeUpdateMessage = "alert-success";
+					this.typeUpdateMessage = "alert-info";
 				}
 			},
 			(err : any) => {
@@ -78,7 +81,6 @@ export class UserEditComponent implements OnInit {
 
 	public makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
 		var token = this.token;
-
 		return new Promise(function(resolve, reject) {
 			var formData: any = new FormData();
 			var xhr = new XMLHttpRequest();

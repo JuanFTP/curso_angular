@@ -1,46 +1,78 @@
-<div *ngIf="identity">
-	<!-- Image and text -->
-	<nav id="navigation" class="navbar navbar-dark bg-dark navbar-expand sticky-top">
-		<a class="navbar-brand" href="#">
-			<img src="./../assets/img/icon.svg" width="30" height="30" class="d-inline-block align-top"
-				alt="" loading="lazy">
-			{{title}}
-		</a>
-		<div class="collapse navbar-collapse justify-content-end">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="#"><i class="fas fa-search"></i> Buscar</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Reciente <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Albumes</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Artistas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Canciones</a>
-				</li>
-				<li id="user_logged" class="nav-item dropdown dropdown-menu-left active">
-					<a id="identity_name" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{identity.name}} {{identity.surname}}</a>
-					<div class="dropdown-menu">
-						<a [routerLink]="['/mis-datos']" href="#" class="dropdown-item"><i class="fas fa-cog"></i> Mi cuenta</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item text-danger" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+<div class="container-fluid" *ngIf="identity">
+	<div class="row vh-100">
+		<div class="col-lg-2 overflow-hidden bg-sidebar">
+			<div class="row">
+				<div class="col-lg-12 text-center pt-3 pb-3">
+					<a class="navbar-brand text-dark" [routerLink]="['/']" href="#">
+						<img src="./../assets/img/icon.svg" width="30" height="30" class="d-inline-block align-top"
+							alt="" loading="lazy">
+						{{title}}
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg">
+					<div class="navigation">
+						<a class="navigation-item rounded" href="#">
+							<i class="navigation-icon fas fa-search"></i>
+							<span class="navigation-title">
+								Buscar
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#">
+							<i class="navigation-icon fas fa-clock"></i>
+							<span class="navigation-title">
+								Reciente
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#">
+							<i class="navigation-icon fas fa-portrait"></i>
+							<span class="navigation-title">
+								Albumes
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#">
+							<i class="navigation-icon fas fa-user-alt"></i>
+							<span class="navigation-title">
+								Artistas
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#">
+							<i class="navigation-icon fas fa-music"></i>
+							<span class="navigation-title">
+								Canciones
+							</span>
+						</a>
+						<div class="navigation-divider"></div>
+						<a class="navigation-item-perfil rounded" href="#">
+							<img *ngIf="user.image != 'null'" id="avatar_header_usuario" class="rounded-circle navigation-image" src="{{url+'get-image-user/'+identity.image}}" alt="">
+							<span id="identity_name" class="navigation-title">{{identity.name}} {{identity.surname}}</span>
+						</a>
+						<a class="navigation-item rounded" href="#" [routerLink]="['/mis-datos']">
+							<i class="navigation-icon fas fa-cog"></i>
+							<span class="navigation-title">
+								Mi cuenta
+							</span>
+						</a>
+						<a class="navigation-item rounded" (click)="logout()" href="#">
+							<i class="navigation-icon fas fa-sign-out-alt"></i>
+							<span class="navigation-title">
+								Salir
+							</span>
+						</a>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</div>
-	</nav>
-
-	<div class="container">
-		<router-outlet></router-outlet>
+		<div class="bg-gray col-lg-10">
+			<div class="container-fluid">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
 	</div>
 </div>
 
-<div *ngIf="!identity" class="container">
+<div class="container" *ngIf="!identity">
 	<div class="row my-5">
 		<div class="card">
 			<div class="row no-gutters">
