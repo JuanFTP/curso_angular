@@ -1,16 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap');
+
 html, body {
 	margin: 0px;
 	box-sizing: border-box;
+	font-family: 'Raleway', sans-serif;
 }
 
 .bg-sidebar {
-	background-color: #EEEEEE;
+	background-color: #eeeeee;
 }
 
+/* NAVIGATION */
 .navigation {
 	-webkit-transition: all ease-in 250ms;
 	-o-transition: all ease-in 250ms;
 	transition: all ease-in 250ms;
+	user-select: none;
 }
 
 .navigation-divider {
@@ -46,8 +51,7 @@ html, body {
 		transition: inherit;
 	}
 
-	.navigation a.navigation-item:hover,
-	.navigation a.navigation-item-perfil:hover {
+	.navigation a.navigation-item:hover {
 		color: white;
 		background-color: rgba(0, 0, 0, 1);
 	}
@@ -60,6 +64,11 @@ html, body {
 			margin-right: 16px;
 		}
 
+		.navigation a.navigation-item.actived {
+			color: white;
+			background-color: rgba(0, 0, 0, 1);
+		}
+
 	.navigation a.navigation-item-perfil {
 		color: inherit;
 		text-decoration: none;
@@ -69,6 +78,7 @@ html, body {
 		padding: 10px 15px 10px 11px;
 		height: 48px;
 		transition: inherit;
+		cursor: default;
 	}
 
 		.navigation a.navigation-item-perfil .navigation-image {
@@ -77,3 +87,18 @@ html, body {
 			width: 28px;
 			margin-right: 16px;
 		}
+
+/* BANNER HOME */
+.banner-home {
+	background: #f7dcbc;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right,#f7dcbc, #f0941b);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right,#f7dcbc, #f0941b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+	.banner-home .banner-title {
+		font-size: 32px;
+	}
+
+	.banner-home .banner-description {
+		font-size: 16px;
+	}

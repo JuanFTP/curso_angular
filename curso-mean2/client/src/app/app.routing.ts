@@ -4,11 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Importar los componentes que tengan que ver con el usuario
 import { UserEditComponent } from './components/user-edit.component';
+import { ArtistListComponent } from './components/artist-list.component';
+import { HomeComponent } from './components/home.component';
 
 const appRouters: Routes = [
-	{ path: '', component: UserEditComponent },
+	{
+		path: '',
+		redirectTo: 'home',
+		pathMatch: 'full'
+	},
+	{ path: 'home', component: HomeComponent },
 	{ path: 'mis-datos', component: UserEditComponent },
-	{ path: '**', component: UserEditComponent }
+	{ path: 'artist/:page', component: ArtistListComponent }
 ];
 
 export const appRoutingProviders: any[] = [];
