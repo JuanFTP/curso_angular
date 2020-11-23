@@ -3,7 +3,7 @@
 		<h2>{{title}}</h2>
 		<div *ngIf="identity && identity.role == 'ROLE_ADMIN'">
 			<p>Gestionar artistas registrados</p>
-			<a  class="btn btn-primary" href="#" role="button">Añadir artista</a>
+			<a  class="btn btn-primary" href="#" role="button" [routerLink]="['/create-artist']">Añadir artista</a>
 		</div>
 	</div>
 </div>

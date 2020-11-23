@@ -49,18 +49,18 @@ function getArtists(req, res) {
 	var page = (req.params.page != null ? req.params.page : 1);
 	var itemsPerPage = 4;
 	
-	Artist.find().sort('name').paginate(page, itemsPerPage, (err, artists, total) => {
+	Artist.find().sort('name').paginate(page, itemsPerPage, (err, artist, total) => {
 		if(err) {
 			res.status(500).send({message: 'Error en la paginación'});
 		} else {
-			if(!artists) {
+			if(!artist) {
 				res.status(404).send({message: 'No hay artistas'});
 			} else {
 				res.status(200).send({
 					message: 'Artistas obtenidos correctamente',
 					itemsPerPage,
 					total_items: total,
-					artists
+					artist
 				});
 			}
 		}

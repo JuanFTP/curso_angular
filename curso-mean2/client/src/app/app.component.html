@@ -1,6 +1,6 @@
 <div class="container-fluid" *ngIf="identity">
 	<div class="row vh-100">
-		<div class="col-lg-2 overflow-hidden bg-sidebar">
+		<div class="col-lg-2 overflow-hidden bg-sidebar shadow-sm">
 			<div class="row">
 				<div class="col-lg-12 text-center pt-3 pb-3">
 					<a class="navbar-brand text-dark" [routerLink]="['/home']" href="#">
@@ -31,7 +31,7 @@
 								Albumes
 							</span>
 						</a>
-						<a class="navigation-item rounded" href="#" [routerLink]="['/artist', 1]" [routerLinkActive] = "['actived']">
+						<a class="navigation-item rounded" href="#" [routerLink]="['/artists', 1]" [routerLinkActive] = "['actived']">
 							<i class="navigation-icon fas fa-user-alt"></i>
 							<span class="navigation-title">
 								Artistas

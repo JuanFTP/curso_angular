@@ -8,8 +8,8 @@ import { User } from '../models/user';
 @Injectable()
 export class UserService {
 	public url: string;
-	public identity;
-	public token;
+	public identity: any;
+	public token: string;
 
 	constructor(private _http: HttpClient) {
 		this.url = GLOBAL.url;
