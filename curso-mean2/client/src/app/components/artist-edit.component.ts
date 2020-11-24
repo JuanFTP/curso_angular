@@ -4,13 +4,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GLOBAL } from './../services/global';
 import { UserService } from './../services/user.service';
 import { Artist } from './../models/artist';
+import { UploadService } from '../services/upload.service';
 import { ArtistService } from '../services/artist.service';
-import { stringify } from 'querystring';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
 	selector: 'artist-edit',
 	templateUrl: './../views/artist-add.html',
 	providers: [
+		AuthenticationService,
+		UploadService,
 		UserService,
 		ArtistService
 	]
@@ -26,17 +29,13 @@ export class ArtistEditComponent implements OnInit {
 	public alertCreateArtist: string;
 	public is_edit: boolean;
 	public legendButtonForm: string;
-	
-	ngOnInit(): void {
-		console.log("artist-edit.component cargado...");
-		
-		// Llamar al método del API para sacar un artista con base en su ID getArtist
-		this.getArtist();
-	}
+	public filesToUpload: Array<File>;
 
 	public constructor(
 		private _route: ActivatedRoute,
 		private _router: Router,
+		private _authenticationService: AuthenticationService,
+		private _uploadService: UploadService,
 		private _userService: UserService,
 		private _artistService: ArtistService
 	) {
@@ -47,6 +46,16 @@ export class ArtistEditComponent implements OnInit {
 		this.is_edit = true;
 		this.legendButtonForm = "Actualizar";
 		this.artist = new Artist('', '', '', '');
+
+		if(!this._authenticationService.isAdmin(this.identity)) {
+			this._router.navigate(['/home']);
+		}
+	}
+
+	ngOnInit(): void {
+		console.log("artist-edit.component cargado...");
+		// Llamar al método del API para sacar un artista con base en su ID getArtist
+		this.getArtist();
 	}
 
 	public getArtist() {
@@ -86,9 +95,18 @@ export class ArtistEditComponent implements OnInit {
 					} else {
 						this.alertCreateArtist = res.message;
 						this.typeCreateMessage = "alert-info";
-	
-						// Redireccionar a edición del artista para terminar con la imagen
-						//this._router.navigate(['/artist-edit', res.artist._id]);
+						
+						// Subir la imagen del artista
+						this._uploadService.makeFileRequest(this.url+'/upload-image-artist/'+id, [], this.filesToUpload, this.token, 'image')
+						.then(
+							(res : any) => {
+								this._router.navigate(['/artists/', 1]);
+							},
+							(err : any) => {
+								this.alertCreateArtist = err.error.message;
+								this.typeCreateMessage = "alert-danger";
+							}
+						);
 					}
 				},
 				(err : any) => {
@@ -101,5 +119,9 @@ export class ArtistEditComponent implements OnInit {
 				}
 			);
 		});
+	}
+
+	public fileChangeEvent(fileInput: any) {
+		this.filesToUpload = <Array<File>>fileInput.target.files;
 	}
 }

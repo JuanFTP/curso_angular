@@ -47,7 +47,7 @@ function saveArtist(req, res) {
 
 function getArtists(req, res) {
 	var page = (req.params.page != null ? req.params.page : 1);
-	var itemsPerPage = 4;
+	var itemsPerPage = 6;
 	
 	Artist.find().sort('name').paginate(page, itemsPerPage, (err, artist, total) => {
 		if(err) {
@@ -60,7 +60,7 @@ function getArtists(req, res) {
 					message: 'Artistas obtenidos correctamente',
 					itemsPerPage,
 					total_items: total,
-					artist
+					artists: artist
 				});
 			}
 		}

@@ -5,11 +5,13 @@ import { GLOBAL } from './../services/global';
 import { UserService } from './../services/user.service';
 import { Artist } from './../models/artist';
 import { ArtistService } from '../services/artist.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
 	selector: 'artist-add',
 	templateUrl: './../views/artist-add.html',
 	providers: [
+		AuthenticationService,
 		UserService,
 		ArtistService
 	]
@@ -24,15 +26,12 @@ export class ArtistAddComponent implements OnInit {
 	public typeCreateMessage: string = "alert-danger";
 	public alertCreateArtist: string;
 	public is_edit: boolean;
-	public legendButtonForm: string;
-	
-	ngOnInit(): void {
-		console.log("artist-add.component cargado...");
-	}
+	public legendButtonForm: string;	
 
 	public constructor(
 		private _route: ActivatedRoute,
 		private _router: Router,
+		private _authenticationService: AuthenticationService,
 		private _userService: UserService,
 		private _artistService: ArtistService
 	) {
@@ -43,6 +42,14 @@ export class ArtistAddComponent implements OnInit {
 		this.artist = new Artist('', '', '', '');
 		this.is_edit = false;
 		this.legendButtonForm = "Agregar";
+		
+		if(!this._authenticationService.isAdmin(this.identity)) {
+			this._router.navigate(['/home']);
+		}
+	}
+
+	ngOnInit(): void {
+		console.log("artist-add.component cargado...");
 	}
 
 	public onSubmit() {
