@@ -7,6 +7,7 @@ import { Artist } from './../models/artist';
 import { UploadService } from '../services/upload.service';
 import { ArtistService } from '../services/artist.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { Album } from '../models/album';
 
 @Component({
 	selector: 'artist-detail',
@@ -22,11 +23,14 @@ import { AuthenticationService } from '../services/authentication.service';
 export class ArtistDetailComponent implements OnInit {
 	public title: string;
 	public artist: Artist;
+	public albums: Album;
 	public identity: any;
 	public token: string;
 	public url: string;
 	public filesToUpload: Array<File>;
 	public alertMessage: string;
+	public bannerArtist: any;
+	public listDescription: Array<String>;
 
 	public constructor(
 		private _route: ActivatedRoute,
@@ -39,6 +43,7 @@ export class ArtistDetailComponent implements OnInit {
 		this.url = GLOBAL.url;
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
+		this.artist = new Artist('', '', '', '');
 
 		if(!this._authenticationService.isLogged(this.identity)) {
 			this._router.navigate(['/home']);
@@ -63,6 +68,10 @@ export class ArtistDetailComponent implements OnInit {
 						this.artist = res.artist;
 						this.title = this.artist.name;
 
+						// Añadir imagen al artist
+						this.bannerArtist = document.getElementById("bannerArtist");
+						this.bannerArtist.style.backgroundImage = "url(\""+this.url+"get-image-artist/"+this.artist.image+"\")";
+						this.listDescription = this.getListDescription();
 						// Obtener los albumes del artista
 					}
 				},
@@ -75,5 +84,9 @@ export class ArtistDetailComponent implements OnInit {
 				}
 			);
 		});
+	}
+
+	public getListDescription() {
+		return this.artist.description.replace(" ", "").split(",");
 	}
 }

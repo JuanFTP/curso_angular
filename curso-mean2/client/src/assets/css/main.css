@@ -10,6 +10,10 @@ html, body {
 	background-color: #eeeeee;
 }
 
+.bg-color {
+	background-color: #E39631;
+}
+
 /* NAVIGATION */
 .navigation {
 	-webkit-transition: all ease-in 250ms;
@@ -20,7 +24,7 @@ html, body {
 
 .navigation-divider {
 	margin: 4px 0px;
-    background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.2);
     border: none;
     height: 1px;
 }
@@ -101,4 +105,51 @@ html, body {
 
 	.banner-home .banner-description {
 		font-size: 16px;
+	}
+
+/* BANNER FULL */
+.banner-full {
+	display: block;
+	min-height: 480px;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	overflow: hidden;
+	user-select: none;
+}
+
+.banner-full-container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+	height: 100%;
+}
+
+.banner-info {
+	width: 100%;
+	background: rgba(86, 86, 86, 0.25);
+	backdrop-filter: blur(8px);
+}
+
+.capsule {
+	display: inline;
+	margin: 0px 4px;
+	padding: 2px 8px;
+	border-radius: 8px;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	user-select: none;
+}
+
+	.capsule:first-child {
+		margin-left: 0px;
+	}
+
+	.capsule:last-child {
+		margin-right: 0px;
 	}

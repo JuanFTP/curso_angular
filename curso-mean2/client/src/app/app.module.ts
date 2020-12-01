@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { UserEditComponent } from './components/user-edit.component';
 import { appRoutingProviders, routing } from './app.routing';
 import { ArtistListComponent } from './components/artist-list.component';
@@ -24,6 +25,7 @@ import { ArtistDetailComponent } from './components/artist-detail.component';
 	],
 	imports: [
 		BrowserModule,
+		SweetAlert2Module.forRoot(),
 		FormsModule,
 		AppRoutingModule,
 		HttpClientModule,
