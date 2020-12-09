@@ -61,6 +61,7 @@ export class ArtistEditComponent implements OnInit {
 	public getArtist() {
 		this._route.params.forEach((params: Params) => {
 			let id = params['id'];
+			
 			this._artistService.getArtist(this.token, id).subscribe(
 				(res : any ) => {
 					if(!res.artist) {
