@@ -1,19 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { UserEditComponent } from './components/user-edit.component';
-import { appRoutingProviders, routing } from './app.routing';
-import { ArtistListComponent } from './components/artist-list.component';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms'
+import { appRoutingProviders, routing } from './app.routing';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
+
+import { UserEditComponent } from './components/user-edit.component';
+
+import { ArtistListComponent } from './components/artist-list.component';
 import { ArtistAddComponent } from './components/artist-add.component';
 import { ArtistEditComponent } from './components/artist-edit.component';
 import { ArtistDetailComponent } from './components/artist-detail.component';
+
 import { AlbumAddComponent } from './components/album-add.component';
 import { AlbumEditComponent } from './components/album-edit.component';
+import { AlbumDetailComponent } from './components/album-detail.component';
+
+import { SongAddComponent } from './components/song-add.component';
 
 @NgModule({
 	declarations: [
@@ -25,7 +32,9 @@ import { AlbumEditComponent } from './components/album-edit.component';
 		ArtistEditComponent,
 		ArtistDetailComponent,
 		AlbumAddComponent,
-		AlbumEditComponent
+		AlbumEditComponent,
+		AlbumDetailComponent,
+		SongAddComponent
 	],
 	imports: [
 		BrowserModule,

@@ -6,12 +6,29 @@ html, body {
 	font-family: 'Raleway', sans-serif;
 }
 
-.bg-sidebar {
-	background-color: #eeeeee;
+.sidebar {
+	height: 100vh;
+	max-height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
-.bg-color {
+	.sidebar .sidebar-menu {
+		height: calc(100% - 88px);
+	}
+
+.general-container {
+	height: 100vh;
+	max-height: 100vh;
+	overflow: auto;
+}
+
+.bg-main {
 	background-color: #E39631;
+}
+
+.bg-sidebar {
+	background-color: #EEEEEE;
 }
 
 /* NAVIGATION */

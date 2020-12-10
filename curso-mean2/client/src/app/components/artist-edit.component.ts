@@ -94,20 +94,24 @@ export class ArtistEditComponent implements OnInit {
 						this.alertCreateArtist = res.message;
 						this.typeCreateMessage = "alert-danger";
 					} else {
-						this.alertCreateArtist = res.message;
-						this.typeCreateMessage = "alert-info";
-						
-						// Subir la imagen del artista
-						this._uploadService.makeFileRequest(this.url+'/upload-image-artist/'+id, [], this.filesToUpload, this.token, 'image')
-						.then(
-							(res : any) => {
-								this._router.navigate(['/artists/', 1]);
-							},
-							(err : any) => {
-								this.alertCreateArtist = err.error.message;
-								this.typeCreateMessage = "alert-danger";
-							}
-						);
+						if(!this.filesToUpload) {
+							this._router.navigate(['/artist', res.artist._id]);
+						} else {
+							this.alertCreateArtist = res.message;
+							this.typeCreateMessage = "alert-info";
+							
+							// Subir la imagen del artista
+							this._uploadService.makeFileRequest(this.url+'/upload-image-artist/'+id, [], this.filesToUpload, this.token, 'image')
+							.then(
+								(res : any) => {
+									this._router.navigate(['/artists/', 1]);
+								},
+								(err : any) => {
+									this.alertCreateArtist = err.error.message;
+									this.typeCreateMessage = "alert-danger";
+								}
+							);
+						}
 					}
 				},
 				(err : any) => {

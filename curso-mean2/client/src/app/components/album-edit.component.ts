@@ -42,7 +42,7 @@ export class AlbumEditComponent implements OnInit {
 		private _userService: UserService,
 		private _albumService: AlbumService
 	) {
-		this.title = "Editar album";
+		this.title = "Editar álbum";
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;

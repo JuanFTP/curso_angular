@@ -45,7 +45,11 @@ function getAlbums(req, res) {
 			if(!albums) {
 				res.status(404).send({message: 'No hay albums'});
 			} else {
-				res.status(200).send({message: 'Albumes obtenidos correctamente', albums});
+				if(albums.length > 0) {
+					res.status(200).send({message: 'Albumes obtenidos correctamente', albums});
+				} else {
+					res.status(200).send({message: 'No hay albums'});
+				}
 			}
 		}
 	});
@@ -58,7 +62,7 @@ function saveAlbum(req, res) {
 	album.title = params.title;
 	album.description = params.description;
 	album.year = params.year;
-	album.image = null;
+	album.image = "5HifqDvtIu6Z6GXmzoMxq-X0.jpg";
 	album.artist = params.artist;
 
 	album.save((err, albumStored) => {

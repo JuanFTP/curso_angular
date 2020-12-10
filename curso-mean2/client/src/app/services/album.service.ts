@@ -13,6 +13,23 @@ export class AlbumService {
 		this.url = GLOBAL.url;
 	}
 
+	public getAlbums(token: string, artistId: string = null) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		if(artistId == null) {
+			// Obtener todos los albumes
+			return this._http.get(this.url+'albums', {headers: headers})
+			.pipe(map(res => res));
+		} else {
+			// Obtener los albumes de un artista en concreto
+			return this._http.get(this.url+'albums/'+artistId, {headers: headers})
+			.pipe(map(res => res));
+		}
+	}
+
 	public addAlbum(token: string, album: Album) {
 		let params = JSON.stringify(album);
 		let headers = new HttpHeaders({
@@ -42,6 +59,16 @@ export class AlbumService {
 		});
 
 		return this._http.put(this.url+'album/'+id, params, { headers: headers })
+		.pipe(map(res => res));
+	}
+
+	public deleteAlbum(token: string, id: string) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		return this._http.delete(this.url+'album/'+id, {headers: headers})
 		.pipe(map(res => res));
 	}
 }

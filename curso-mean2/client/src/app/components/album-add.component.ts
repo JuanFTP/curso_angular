@@ -38,7 +38,7 @@ export class AlbumAddComponent implements OnInit {
 		private _userService: UserService,
 		private _albumService: AlbumService
 	) {
-		this.title = "Crear album";
+		this.title = "Crear álbum";
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;

@@ -1,8 +1,8 @@
 <div class="container-fluid" *ngIf="identity">
-	<div class="row vh-100">
-		<div class="col-lg-2 overflow-hidden bg-sidebar shadow-sm">
+	<div class="row">
+		<div class="sidebar col-lg-2 col-md-3 col-sm-4 bg-sidebar">
 			<div class="row">
-				<div class="col-lg-12 text-center pt-3 pb-3">
+				<div class="col-lg-12 text-center pt-4 pb-4">
 					<a class="navbar-brand text-dark" [routerLink]="['/home']" href="#">
 						<img src="./../assets/img/icon.svg" width="30" height="30" class="d-inline-block align-top"
 							alt="" loading="lazy">
@@ -10,8 +10,8 @@
 					</a>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg">
+			<div class="row sidebar-menu">
+				<div class="col-lg-12">
 					<div class="navigation">
 						<a class="navigation-item rounded" href="#">
 							<i class="navigation-icon fas fa-search"></i>
@@ -28,7 +28,7 @@
 						<a class="navigation-item rounded" href="#">
 							<i class="navigation-icon fas fa-portrait"></i>
 							<span class="navigation-title">
-								Albumes
+								Álbumes
 							</span>
 						</a>
 						<a class="navigation-item rounded" href="#" [routerLink]="['/artists', 1]" [routerLinkActive] = "['actived']">
@@ -64,7 +64,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="bg-gray col-lg-10">
+		<div class="general-container col-lg-10 col-md-9 col-sm-8">
 			<div class="container-fluid">
 				<router-outlet></router-outlet>
 			</div>

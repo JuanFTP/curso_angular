@@ -30,7 +30,7 @@ function saveArtist(req, res) {
 	var params  =req.body;
 	artist.name = params.name;
 	artist.description = params.description;
-	artist.image = 'null';
+	artist.image = "ZXS4rpYwyxmhNn4CqD3bJxXD.jpg";
 
 	artist.save((err, artistStore) => {
 		if(err) {
@@ -47,7 +47,7 @@ function saveArtist(req, res) {
 
 function getArtists(req, res) {
 	var page = (req.params.page != null ? req.params.page : 1);
-	var itemsPerPage = 8;
+	var itemsPerPage = 12;
 	
 	Artist.find().sort('name').paginate(page, itemsPerPage, (err, artist, total) => {
 		if(err) {
