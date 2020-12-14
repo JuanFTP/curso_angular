@@ -6,10 +6,10 @@
 			</div>
 		</div>
 		<div *ngIf="album" class="row flex align-items-center">
-			<div class="col-lg-2">
+			<div class="col-lg-2 col-md-3 col-sm-4">
 				<img class="img-fluid rounded" src="{{url + 'get-image-album/' + album.image}}" alt="">
 			</div>
-			<div class="col-lg-10">
+			<div class="col-lg-10 col-md-9 col-sm-8">
 				<h2>{{album.title}}</h2>
 				<div>De <strong><a [routerLink]="['/artist/', album.artist._id]"  class="text-dark" href="#">{{album.artist.name}}</a></strong></div>
 				<div>

@@ -25,16 +25,16 @@
 								Reciente
 							</span>
 						</a>
-						<a class="navigation-item rounded" href="#">
-							<i class="navigation-icon fas fa-portrait"></i>
-							<span class="navigation-title">
-								Álbumes
-							</span>
-						</a>
 						<a class="navigation-item rounded" href="#" [routerLink]="['/artists', 1]" [routerLinkActive] = "['actived']">
 							<i class="navigation-icon fas fa-user-alt"></i>
 							<span class="navigation-title">
 								Artistas
+							</span>
+						</a>
+						<a class="navigation-item rounded" href="#">
+							<i class="navigation-icon fas fa-portrait"></i>
+							<span class="navigation-title">
+								Álbumes
 							</span>
 						</a>
 						<a class="navigation-item rounded" href="#">
@@ -44,16 +44,16 @@
 							</span>
 						</a>
 						<div class="navigation-divider"></div>
-						<a class="navigation-item-perfil rounded" href="#">
+						<a class="navigation-item-perfil rounded" href="#" [routerLink]="['/mis-datos']">
 							<img *ngIf="user.image != 'null'" id="avatar_header_usuario" class="rounded-circle navigation-image" src="{{url+'get-image-user/'+identity.image}}" alt="">
 							<span id="identity_name" class="navigation-title">{{identity.name}} {{identity.surname}}</span>
 						</a>
-						<a class="navigation-item rounded" href="#" [routerLink]="['/mis-datos']" [routerLinkActive] = "['actived']">
+						<!--<a class="navigation-item rounded" href="#" [routerLink]="['/mis-datos']" [routerLinkActive] = "['actived']">
 							<i class="navigation-icon fas fa-cog"></i>
 							<span class="navigation-title">
 								Mi cuenta
 							</span>
-						</a>
+						</a>-->
 						<a class="navigation-item rounded" (click)="logout()" href="#">
 							<i class="navigation-icon fas fa-sign-out-alt"></i>
 							<span class="navigation-title">
