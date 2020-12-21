@@ -4,13 +4,15 @@ import { GLOBAL } from './../services/global';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from './../services/user.service';
 import { Song } from './../models/song';
+import { SongService } from '../services/song.service';
 
 @Component({
 	selector: 'song-add',
 	templateUrl: './../views/song-add.html',
 	providers: [
 		AuthenticationService,
-		UserService
+		UserService,
+		SongService
 	]
 })
 
@@ -29,7 +31,8 @@ export class SongAddComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _authenticationService: AuthenticationService,
-		private _userService: UserService
+		private _userService: UserService,
+		private _songService: SongService
 	) {
 		this.title = "Agregar canción";
 		this.identity = this._userService.getIdentity();
@@ -49,6 +52,36 @@ export class SongAddComponent implements OnInit {
 	}
 
 	public onSubmit() {
-		console.log(this.song);
+		this._route.params.forEach((params: Params) => {
+			let albumId = params['album'];
+			this.song.album = albumId;
+
+			// Crear canción
+			this._songService.addSong(this.token, this.song).subscribe(
+				(res : any) => {
+					if(!res.song) {
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-danger";
+					} else {
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-success";
+						this.song = res.song;
+						console.log(this.song);
+					}
+				},
+				(err : any) => {
+					var errorResult = <any>err;
+					
+					if(errorResult != null) {
+						this.alertMessage = err.error.message;
+						this.typeMessage = "alert-danger";
+					}
+				}
+			);
+		});
+	}
+
+	public fileChangeEvent(event: any) {
+		console.log("fileChangeEvent...");
 	}
 }

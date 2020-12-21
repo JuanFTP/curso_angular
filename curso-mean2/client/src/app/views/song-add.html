@@ -8,6 +8,17 @@
 					{{alertMessage}}
 				</div>
 				<form #songAddForm="ngForm" (ngSubmit)="onSubmit()">
+					<div *ngIf="isEdit">
+						<div *ngIf="song.file && song.file != null" style="width: 100%" class="pb-2 pt-2">
+							<audio style="width: 100%;" id="file_for_song" controls>
+								<source src="{{ url + 'get-song-file/' + song.file}}" type="audio/mpeg"/>
+							</audio>
+						</div>
+						<p>
+							<label for="se_file">Subir archivo de audio</label><br>
+							<input type="file" name="se_file" id="se_file" placeholder="Selecciona un archivo..." (change)="fileChangeEvent($event)">
+						</p>
+					</div>
 					<p>
 						<label for="sa_number">Número</label>
 						<input type="text" #sa_number="ngModel" name="sa_number" id="sa_number" [(ngModel)]="song.number" class="form-control" placeholder="Número" value="" required>
