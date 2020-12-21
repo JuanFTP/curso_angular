@@ -19,13 +19,14 @@ import { AlbumService } from '../services/album.service';
 
 export class AlbumDetailComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public album: Album;
 	public identity: any;
 	public token: string;
-	public url: string;
+	public listDescription: Array<String>;
+	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
-	public listDescription: Array<String>;
 
 	public constructor(
 		private _route: ActivatedRoute,

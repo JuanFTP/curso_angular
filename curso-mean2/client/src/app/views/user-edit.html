@@ -4,8 +4,8 @@
 		<p>Actualiza los datos de tu cuenta</p>
 		<div class="row">
 			<div class="col-lg-6">
-				<div *ngIf="alertUpdate" class="alert {{typeUpdateMessage}}" role="alert">
-					{{alertUpdate}}
+				<div *ngIf="alertMessage" class="alert {{typeMessage}}" role="alert">
+					{{alertMessage}}
 				</div>
 				<form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()">
 					<div class="text-center" *ngIf="user.image != 'null'">

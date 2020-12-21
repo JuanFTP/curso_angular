@@ -19,14 +19,16 @@ import { AuthenticationService } from '../services/authentication.service';
 
 export class ArtistAddComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public artist: Artist;
 	public identity: any;
 	public token: string;
-	public url: string;
-	public typeCreateMessage: string = "alert-danger";
-	public alertCreateArtist: string;
-	public is_edit: boolean;
-	public legendButtonForm: string;	
+	// Variables para mensages
+	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
+	// Variables para edición
+	public isEdit: boolean;
+	public legendButton: string;
 
 	public constructor(
 		private _route: ActivatedRoute,
@@ -40,8 +42,8 @@ export class ArtistAddComponent implements OnInit {
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
 		this.artist = new Artist('', '', '', '');
-		this.is_edit = false;
-		this.legendButtonForm = "Agregar";
+		this.isEdit = false;
+		this.legendButton = "Agregar";
 		
 		if(!this._authenticationService.isAdmin(this.identity)) {
 			this._router.navigate(['/home']);
@@ -56,11 +58,11 @@ export class ArtistAddComponent implements OnInit {
 		this._artistService.addArtist(this.token, this.artist).subscribe(
 			(res : any) => {
 				if(!res.artist) {
-					this.alertCreateArtist = res.message;
-					this.typeCreateMessage = "alert-danger";
+					this.alertMessage = res.message;
+					this.typeMessage = "alert-danger";
 				} else {
-					this.alertCreateArtist = res.message;
-					this.typeCreateMessage = "alert-info";
+					this.alertMessage = res.message;
+					this.typeMessage = "alert-info";
 					this.artist = res.artist;
 
 					// Redireccionar a edición del artista para terminar con la imagen
@@ -71,8 +73,8 @@ export class ArtistAddComponent implements OnInit {
 				var errorAddArtist = <any>err;
 				
 				if(errorAddArtist != null) {
-					this.alertCreateArtist = err.error.message;
-					this.typeCreateMessage = "alert-danger";
+					this.alertMessage = err.error.message;
+					this.typeMessage = "alert-danger";
 				}
 			}
 		);

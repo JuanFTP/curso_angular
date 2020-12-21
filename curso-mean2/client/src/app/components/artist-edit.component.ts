@@ -21,15 +21,17 @@ import { AuthenticationService } from '../services/authentication.service';
 
 export class ArtistEditComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public artist: Artist;
 	public identity: any;
 	public token: string;
-	public url: string;
-	public typeCreateMessage: string = "alert-danger";
-	public alertCreateArtist: string;
-	public is_edit: boolean;
-	public legendButtonForm: string;
 	public filesToUpload: Array<File>;
+	// Variables para mensages
+	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
+	// Variables para edición
+	public isEdit: boolean;
+	public legendButton: string;
 
 	public constructor(
 		private _route: ActivatedRoute,
@@ -43,8 +45,8 @@ export class ArtistEditComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.is_edit = true;
-		this.legendButtonForm = "Actualizar";
+		this.isEdit = true;
+		this.legendButton = "Actualizar";
 		this.artist = new Artist('', '', '', '');
 
 		if(!this._authenticationService.isAdmin(this.identity)) {
@@ -65,8 +67,8 @@ export class ArtistEditComponent implements OnInit {
 			this._artistService.getArtist(this.token, id).subscribe(
 				(res : any ) => {
 					if(!res.artist) {
-						this.alertCreateArtist = res.message;
-						this.typeCreateMessage = "alert-danger";
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-danger";
 						this._router.navigate(['/']);
 					} else {
 						this.artist = res.artist;
@@ -76,8 +78,8 @@ export class ArtistEditComponent implements OnInit {
 					var errorAddArtist = <any>err;
 					
 					if(errorAddArtist != null) {
-						this.alertCreateArtist = err.error.message;
-						this.typeCreateMessage = "alert-danger";
+						this.alertMessage = err.error.message;
+						this.typeMessage = "alert-danger";
 					}
 				}
 			);
@@ -91,14 +93,14 @@ export class ArtistEditComponent implements OnInit {
 			this._artistService.editArtist(this.token, id, this.artist).subscribe(
 				(res : any) => {
 					if(!res.artist) {
-						this.alertCreateArtist = res.message;
-						this.typeCreateMessage = "alert-danger";
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-danger";
 					} else {
 						if(!this.filesToUpload) {
 							this._router.navigate(['/artist', res.artist._id]);
 						} else {
-							this.alertCreateArtist = res.message;
-							this.typeCreateMessage = "alert-info";
+							this.alertMessage = res.message;
+							this.typeMessage = "alert-info";
 							
 							// Subir la imagen del artista
 							this._uploadService.makeFileRequest(this.url+'/upload-image-artist/'+id, [], this.filesToUpload, this.token, 'image')
@@ -107,8 +109,8 @@ export class ArtistEditComponent implements OnInit {
 									this._router.navigate(['/artists/', 1]);
 								},
 								(err : any) => {
-									this.alertCreateArtist = err.error.message;
-									this.typeCreateMessage = "alert-danger";
+									this.alertMessage = err.error.message;
+									this.typeMessage = "alert-danger";
 								}
 							);
 						}
@@ -118,8 +120,8 @@ export class ArtistEditComponent implements OnInit {
 					var errorAddArtist = <any>err;
 					
 					if(errorAddArtist != null) {
-						this.alertCreateArtist = err.error.message;
-						this.typeCreateMessage = "alert-danger";
+						this.alertMessage = err.error.message;
+						this.typeMessage = "alert-danger";
 					}
 				}
 			);

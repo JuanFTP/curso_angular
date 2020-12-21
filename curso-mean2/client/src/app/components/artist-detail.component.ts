@@ -24,16 +24,17 @@ import { AlbumService } from '../services/album.service';
 
 export class ArtistDetailComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public artist: Artist;
 	public albums: Album[];
 	public identity: any;
 	public token: string;
-	public url: string;
 	public filesToUpload: Array<File>;
-	public alertMessage: string;
-	public typeMessage: string = "alert-danger";
 	public bannerArtist: any;
 	public listDescription: Array<String>;
+	// Variables para mensages
+	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
 
 	public constructor(
 		private _route: ActivatedRoute,

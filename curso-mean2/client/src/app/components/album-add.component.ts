@@ -21,13 +21,15 @@ import { AlbumService } from '../services/album.service';
 
 export class AlbumAddComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public artist: Artist;
 	public album: Album;
 	public identity: any;
 	public token: string;
-	public url: string;
-	public typeMessage: string = "alert-danger";
+	// Variables para mensages
 	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
+	// Variables para edición
 	public isEdit: boolean;
 	public legendButton: string;
 

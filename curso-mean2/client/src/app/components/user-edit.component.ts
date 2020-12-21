@@ -12,13 +12,14 @@ import { GLOBAL } from '../services/global';
 
 export class UserEditComponent implements OnInit {
 	public title: string;
+	public url: string = GLOBAL.url;
 	public user: User;
 	public identity: any;
 	public token: any;
-	public typeUpdateMessage: string = "alert-danger";
-	public alertUpdate: string;
 	public filesToUpload: Array<File>;
-	public url: string = GLOBAL.url;
+	// Variables para mensages
+	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
 	
 	public constructor(
 		private _userSevice: UserService
@@ -39,8 +40,8 @@ export class UserEditComponent implements OnInit {
 		this._userSevice.updateUser(this.user).subscribe(
 			(res : any) => {
 				if(!res.user) {
-					this.alertUpdate = res.error.message;
-					this.typeUpdateMessage = "alert-danger";
+					this.alertMessage = res.error.message;
+					this.typeMessage = "alert-danger";
 				} else {				
 					localStorage.setItem('identity', JSON.stringify(this.user));
 					document.getElementById('identity_name').innerHTML = this.user.name+" "+this.user.surname;
@@ -60,16 +61,16 @@ export class UserEditComponent implements OnInit {
 						);
 					}
 
-					this.alertUpdate = res.message;
-					this.typeUpdateMessage = "alert-info";
+					this.alertMessage = res.message;
+					this.typeMessage = "alert-info";
 				}
 			},
 			(err : any) => {
 				var errorUpdateUser = <any>err;
 				
 				if(errorUpdateUser != null) {
-					this.alertUpdate = err.error.message;
-					this.typeUpdateMessage = "alert-danger";
+					this.alertMessage = err.error.message;
+					this.typeMessage = "alert-danger";
 				}
 			}
 		);

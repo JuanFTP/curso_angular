@@ -18,12 +18,14 @@ import { SongService } from '../services/song.service';
 
 export class SongAddComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public identity: any;
 	public song: Song;
 	public token: string;
-	public url: string;
-	public typeMessage: string = "alert-danger";
+	// Variables para mensages
 	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
+	// Variables para edición
 	public isEdit: boolean;
 	public legendButton: string;
 

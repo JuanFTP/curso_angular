@@ -19,12 +19,13 @@ import { AuthenticationService } from '../services/authentication.service';
 
 export class ArtistListComponent implements OnInit {
 	public title: string;
+	public url: string;
 	public artists: Artist[];
 	public identity: any;
 	public token: string;
-	public url: string;
-	// Errores
-	public alertArtists: string;
+	// Variables para mensages
+	public alertMessage: string;
+	public typeMessage: string = "alert-danger";
 	// Paginación
 	public prev_page: number;
 	public next_page: number;
@@ -64,7 +65,7 @@ export class ArtistListComponent implements OnInit {
 							this._router.navigate(['/']);
 						} else {
 							if(!res.artists) {
-								this.alertArtists = res.message;
+								this.alertMessage = res.message;
 							} else {
 								if(res.artists.length == 0) {
 									this._router.navigate(['/artists/', page-1]);
@@ -78,7 +79,7 @@ export class ArtistListComponent implements OnInit {
 						var errorAddArtist = <any>err;
 						
 						if(errorAddArtist != null) {
-							this.alertArtists = err.error.message;
+							this.alertMessage = err.error.message;
 						}
 					}
 				);
@@ -90,7 +91,7 @@ export class ArtistListComponent implements OnInit {
 		this._artistService.deleteArtist(this.token, id).subscribe(
 			(res : any) => {
 				if(!res.artist) {
-					this.alertArtists = res.message;
+					this.alertMessage = res.message;
 				} else {
 					this.getArtists();
 				}
@@ -99,7 +100,7 @@ export class ArtistListComponent implements OnInit {
 				var errorAddArtist = <any>err;
 				
 				if(errorAddArtist != null) {
-					this.alertArtists = err.error.message;
+					this.alertMessage = err.error.message;
 				}
 			}
 		);
