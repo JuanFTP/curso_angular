@@ -44,10 +44,10 @@ function getSongs(req, res) {
 		if(err) {
 			res.status(500).send({message: 'Error en la petición'});
 		} else {
-			if(!songs) {
-				res.status(404).send({message: 'No hay canciones'});
-			} else {
+			if(songs.length > 0) {
 				res.status(200).send({message: 'Canciones obtenidas correctamente', songs});
+			} else {
+				res.status(200).send({message: 'No hay canciones'});
 			}
 		}
 	})
@@ -119,8 +119,6 @@ function uploadFile(req, res) {
 
 		var ext_split = file_name.split('.');
 		var file_ext = ext_split[1];
-
-		console.log(file_ext);
 		
 		if(file_ext == 'mp3' || file_ext == 'm4a') {
 			Song.findByIdAndUpdate(songId, {file: file_name}, (err, songUpdated) => {

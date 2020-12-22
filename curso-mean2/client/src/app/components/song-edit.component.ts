@@ -107,7 +107,7 @@ export class SongEditComponent implements OnInit {
 							this._uploadService.makeFileRequest(this.url+'/upload-file-song/'+id, [], this.filesToUpload, this.token, 'file')
 							.then(
 								(res : any) => {
-									//this._router.navigate(['/album/', res.song.album]);
+									this._router.navigate(['/album/', res.song.album]);
 								},
 								(err : any) => {
 									this.alertMessage = err;

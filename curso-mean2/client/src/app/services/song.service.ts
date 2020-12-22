@@ -34,6 +34,33 @@ export class SongService {
 		.pipe(map(res => res));
 	}
 
+	public getSongs(token: string, albumId: string = null) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		if(albumId == null) {
+			// Obtener todos las canciones
+			return this._http.get(this.url+'songs', {headers: headers})
+			.pipe(map(res => res));
+		} else {
+			// Obtener los canciones de un album en concreto
+			return this._http.get(this.url+'songs/'+albumId, {headers: headers})
+			.pipe(map(res => res));
+		}
+	}
+
+	public deleteSong(token: string, id: string) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		return this._http.delete(this.url+'song/'+id, {headers: headers})
+		.pipe(map(res => res));
+	}
+
 	public editSong(token: string, id: string, song: Song) {
 		let params = JSON.stringify(song);
 		let headers = new HttpHeaders({

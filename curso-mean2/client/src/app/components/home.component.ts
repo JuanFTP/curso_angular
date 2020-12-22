@@ -18,5 +18,7 @@ export class HomeComponent implements OnInit {
 		private _router: Router
 	) {
 		this.title  = "Inicio";
+
+		// Validar sesión, si no se ha loggueado regresarlo al login
 	}
 }
