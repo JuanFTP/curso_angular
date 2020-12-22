@@ -23,4 +23,25 @@ export class SongService {
 		return this._http.post(this.url+'song', params, {headers: headers})
 		.pipe(map(res => res));
 	}
+
+	public getSong(token: string, id: string) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		return this._http.get(this.url+'song/'+id, {headers: headers})
+		.pipe(map(res => res));
+	}
+
+	public editSong(token: string, id: string, song: Song) {
+		let params = JSON.stringify(song);
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		return this._http.put(this.url+'song/'+id, params, { headers: headers })
+		.pipe(map(res => res));
+	}
 }

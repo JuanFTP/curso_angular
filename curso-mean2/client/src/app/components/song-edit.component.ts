@@ -5,23 +5,26 @@ import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from './../services/user.service';
 import { Song } from './../models/song';
 import { SongService } from '../services/song.service';
+import { UploadService } from '../services/upload.service';
 
 @Component({
-	selector: 'song-add',
+	selector: 'song-edit',
 	templateUrl: './../views/song-add.html',
 	providers: [
 		AuthenticationService,
+		UploadService,
 		UserService,
 		SongService
 	]
 })
 
-export class SongAddComponent implements OnInit {
+export class SongEditComponent implements OnInit {
 	public title: string;
 	public url: string;
 	public identity: any;
 	public song: Song;
 	public token: string;
+	public filesToUpload: Array<File>;
 	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
@@ -33,16 +36,17 @@ export class SongAddComponent implements OnInit {
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _authenticationService: AuthenticationService,
+		private _uploadService: UploadService,
 		private _userService: UserService,
 		private _songService: SongService
 	) {
-		this.title = "Agregar canción";
+		this.title = "Editar canción";
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
-		this.url = GLOBAL.url;
 		this.song = new Song('', '', '', '', '', '');
-		this.isEdit = false;
-		this.legendButton = "Guardar";
+		this.url = GLOBAL.url;
+		this.isEdit = true;
+		this.legendButton = "Actualizar";
 
 		if(!this._authenticationService.isAdmin(this.identity)) {
 			this._router.navigate(['/home']);
@@ -50,27 +54,24 @@ export class SongAddComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log("song-add.component cargado...");
+		console.log("song-edit.component cargado...");
+
+		// Obtener canción a editar
+		this.getSong();
 	}
 
-	public onSubmit() {
+	public getSong() {
 		this._route.params.forEach((params: Params) => {
-			let albumId = params['album'];
-			this.song.album = albumId;
+			let id = params['id'];
 
-			// Crear canción
-			this._songService.addSong(this.token, this.song).subscribe(
+			this._songService.getSong(this.token, id).subscribe(
 				(res : any) => {
 					if(!res.song) {
 						this.alertMessage = res.message;
 						this.typeMessage = "alert-danger";
+						this._router.navigate(['/']);
 					} else {
-						this.alertMessage = res.message;
-						this.typeMessage = "alert-success";
 						this.song = res.song;
-						
-						// Redireccionar a la edición
-						this._router.navigate(['/edit-song', res.song._id]);
 					}
 				},
 				(err : any) => {
@@ -85,7 +86,50 @@ export class SongAddComponent implements OnInit {
 		});
 	}
 
-	public fileChangeEvent(event: any) {
-		console.log("fileChangeEvent...");
+	public onSubmit() {
+		this._route.params.forEach((params: Params) => {
+			let id = params['id'];
+
+			// Actualizar los datos de la canción
+			this._songService.editSong(this.token, id, this.song).subscribe(
+				(res : any) => {
+					if(!res.song) {
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-danger";
+					} else {
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-success";
+						
+						if(!this.filesToUpload) {
+							this._router.navigate(['/album/', res.song.album]);
+						} else {
+							// Subir el archivo de audio
+							this._uploadService.makeFileRequest(this.url+'/upload-file-song/'+id, [], this.filesToUpload, this.token, 'file')
+							.then(
+								(res : any) => {
+									//this._router.navigate(['/album/', res.song.album]);
+								},
+								(err : any) => {
+									this.alertMessage = err;
+									this.typeMessage = "alert-danger";
+								}
+							);
+						}
+					}
+				},
+				(err : any) => {
+					var errorResult = <any>err;
+					
+					if(errorResult != null) {
+						this.alertMessage = err.error.message;
+						this.typeMessage = "alert-danger";
+					}
+				}
+			);
+		});
+	}
+	
+	public fileChangeEvent(fileInput: any) {
+		this.filesToUpload = <Array<File>>fileInput.target.files;
 	}
 }

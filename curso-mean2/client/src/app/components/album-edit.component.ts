@@ -79,9 +79,9 @@ export class AlbumEditComponent implements OnInit {
 					}
 				},
 				(err : any) => {
-					var errorAddArtist = <any>err;
+					var errorResult = <any>err;
 					
-					if(errorAddArtist != null) {
+					if(errorResult != null) {
 						this.alertMessage = err.error.message;
 						this.typeMessage = "alert-danger";
 					}
@@ -111,6 +111,7 @@ export class AlbumEditComponent implements OnInit {
 							this.alertMessage = res.message;
 							this.typeMessage = "alert-info";
 							this.album = res.album;
+							
 							// Subir la imagen del album
 							this._uploadService.makeFileRequest(this.url+'/upload-image-album/'+id, [], this.filesToUpload, this.token, 'image')
 							.then(
@@ -126,9 +127,9 @@ export class AlbumEditComponent implements OnInit {
 					}
 				},
 				(err : any) => {
-					var errorAddArtist = <any>err;
+					var errorResult = <any>err;
 					
-					if(errorAddArtist != null) {
+					if(errorResult != null) {
 						this.alertMessage = err.error.message;
 						this.typeMessage = "alert-danger";
 					}

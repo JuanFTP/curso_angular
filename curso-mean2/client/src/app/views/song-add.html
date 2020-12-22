@@ -11,7 +11,7 @@
 					<div *ngIf="isEdit">
 						<div *ngIf="song.file && song.file != null" style="width: 100%" class="pb-2 pt-2">
 							<audio style="width: 100%;" id="file_for_song" controls>
-								<source src="{{ url + 'get-song-file/' + song.file}}" type="audio/mpeg"/>
+								<source src="{{ url + 'get-file-song/' + song.file}}" type="audio/mpeg"/>
 							</audio>
 						</div>
 						<p>
