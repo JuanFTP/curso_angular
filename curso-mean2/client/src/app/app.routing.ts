@@ -30,6 +30,7 @@ const appRouters: Routes = [
 		redirectTo: 'home',
 		pathMatch: 'full'
 	},
+	{ path: '', component: HomeComponent },
 	{ path: 'home', component: HomeComponent },
 	{ path: 'search', component: SearchComponent },
 	{ path: 'recent', component: RecentComponent },
