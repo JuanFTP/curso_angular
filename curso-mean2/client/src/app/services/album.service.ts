@@ -30,6 +30,16 @@ export class AlbumService {
 		}
 	}
 
+	public getAllAlbums(token: string, page: number) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		return this._http.get(this.url+'/all-albums/'+page, { headers: headers })
+		.pipe(map(res => res));
+	}
+
 	public addAlbum(token: string, album: Album) {
 		let params = JSON.stringify(album);
 		let headers = new HttpHeaders({

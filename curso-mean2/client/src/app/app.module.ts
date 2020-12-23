@@ -24,6 +24,7 @@ import { SongAddComponent } from './components/song-add.component';
 import { SongEditComponent } from './components/song-edit.component';
 
 import { PlayerComponent } from './components/player.component';
+import { AlbumListComponent } from './components/album-list.component';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { PlayerComponent } from './components/player.component';
 		ArtistAddComponent,
 		ArtistEditComponent,
 		ArtistDetailComponent,
+		AlbumListComponent,
 		AlbumAddComponent,
 		AlbumEditComponent,
 		AlbumDetailComponent,
