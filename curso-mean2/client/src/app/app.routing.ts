@@ -21,6 +21,7 @@ import { SongEditComponent } from './components/song-edit.component';
 import { AlbumListComponent } from './components/album-list.component';
 import { SongListComponent } from './components/song-list.component';
 import { SearchComponent } from './components/search.component';
+import { RecentComponent } from './components/recent.component';
 
 const appRouters: Routes = [
 	{
@@ -30,6 +31,7 @@ const appRouters: Routes = [
 	},
 	{ path: 'home', component: HomeComponent },
 	{ path: 'search', component: SearchComponent },
+	{ path: 'recent', component: RecentComponent },
 	{ path: 'mis-datos', component: UserEditComponent },
 	{ path: 'artists/:page', component: ArtistListComponent },
 	{ path: 'create-artist', component: ArtistAddComponent },
