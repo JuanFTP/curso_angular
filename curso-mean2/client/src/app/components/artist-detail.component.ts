@@ -59,7 +59,6 @@ export class ArtistDetailComponent implements OnInit {
 		console.log("artist-detail.component cargado...");
 		// Llamar al método del API para sacar un artista con base en su ID getArtist
 		this.getArtist();
-		
 	}
 
 	public getArtist() {

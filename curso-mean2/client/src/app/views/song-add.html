@@ -1,47 +1,72 @@
 <div class="row pt-4 pb-4">
 	<div class="col-lg-12">
-		<h2>{{title}}</h2>
-		<p>Completa los datos para agregar una nueva canción.</p>
-		<div class="row">
+		<div *ngIf="artist && artist != null" class="row">
 			<div class="col-lg-6">
-				<div *ngIf="alertMessage" class="alert {{typeMessage}}" role="alert">
-					{{alertMessage}}
-				</div>
-				<form #songAddForm="ngForm" (ngSubmit)="onSubmit()">
-					<div *ngIf="isEdit">
-						<div *ngIf="song.file && song.file != null" style="width: 100%" class="pb-2 pt-2">
-							<audio style="width: 100%;" id="file_for_song" controls>
-								<source src="{{ url + 'get-file-song/' + song.file}}" type="audio/mpeg"/>
-							</audio>
+				<h2>Artísta</h2>
+				<div class="rounded bg-main-blur p-4">
+					<div class="row flex align-items-center">
+						<div class="col-lg-3">
+							<img class="img-fluid rounded" src="{{url + 'get-image-artist/' + artist.image}}" alt="">
 						</div>
-						<p>
-							<label for="se_file">Subir archivo de audio</label><br>
-							<input type="file" name="se_file" id="se_file" placeholder="Selecciona un archivo..." (change)="fileChangeEvent($event)">
-						</p>
+						<div class="col-lg-9">
+							<h6><a class="text-dark" href="#" [routerLink]="['/artist', artist._id]"><strong>{{artist.name}}</strong></a></h6>
+							<div *ngIf="listDescription">
+								<span *ngFor="let desc of listDescription" class="capsule text-white bg-dark">
+									{{desc}}
+								</span>
+							</div>
+						</div>
 					</div>
-					<p>
-						<label for="sa_number">Número</label>
-						<input type="text" #sa_number="ngModel" name="sa_number" id="sa_number" [(ngModel)]="song.number" class="form-control" placeholder="Número" value="" required>
-						<span *ngIf="!sa_number.valid && sa_name.touched" class="text-danger">
-							Número de canción requerido
-						</span>
-					</p>
-					<p>
-						<label for="sa_name">Nombre</label>
-						<input type="text" #sa_name="ngModel" name="sa_name" id="sa_name" [(ngModel)]="song.name" class="form-control" placeholder="Nombre" value="" required>
-						<span *ngIf="!sa_name.valid && sa_name.touched" class="text-danger">
-							Nombre requerido
-						</span>
-					</p>
-					<p>
-						<label for="sa_duration">Duración (HH:MM:SS)</label>
-						<input ngModel pattern="(\d{2}\:\d{2}\:\d{2})" type="text" #sa_duration="ngModel" name="sa_duration" id="sa_duration" [(ngModel)]="song.duration" class="form-control" placeholder="00:00:00" value="" required>
-						<span *ngIf="!sa_duration.valid && sa_duration.touched" class="text-danger">
-							Duración requerida
-						</span>
-					</p>
-					<button [disabled]="!songAddForm.form.valid" type="submit" class="btn btn-dark" value="{{legendButton}}">{{legendButton}}</button>
-				</form>
+				</div>				
+			</div>
+		</div>
+		<br *ngIf="artist && artist != null">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>{{title}}</h2>
+				<p>Completa los datos para agregar una nueva canción.</p>
+				<div class="row">
+					<div class="col-lg-6">
+						<div *ngIf="alertMessage" class="alert {{typeMessage}}" role="alert">
+							{{alertMessage}}
+						</div>
+						<form #songAddForm="ngForm" (ngSubmit)="onSubmit()">
+							<div *ngIf="isEdit">
+								<div *ngIf="song.file && song.file != null" style="width: 100%" class="pb-2 pt-2">
+									<audio style="width: 100%;" id="file_for_song" controls>
+										<source src="{{ url + 'get-file-song/' + song.file}}" type="audio/mpeg"/>
+									</audio>
+								</div>
+								<p>
+									<label for="se_file">Subir archivo de audio</label><br>
+									<input type="file" name="se_file" id="se_file" placeholder="Selecciona un archivo..." (change)="fileChangeEvent($event)">
+								</p>
+							</div>
+							<p>
+								<label for="sa_number">Número</label>
+								<input type="text" #sa_number="ngModel" name="sa_number" id="sa_number" [(ngModel)]="song.number" class="form-control" placeholder="Número" value="" required>
+								<span *ngIf="!sa_number.valid && sa_name.touched" class="text-danger">
+									Número de canción requerido
+								</span>
+							</p>
+							<p>
+								<label for="sa_name">Nombre</label>
+								<input type="text" #sa_name="ngModel" name="sa_name" id="sa_name" [(ngModel)]="song.name" class="form-control" placeholder="Nombre" value="" required>
+								<span *ngIf="!sa_name.valid && sa_name.touched" class="text-danger">
+									Nombre requerido
+								</span>
+							</p>
+							<p>
+								<label for="sa_duration">Duración (HH:MM:SS)</label>
+								<input ngModel pattern="(\d{2}\:\d{2}\:\d{2})" type="text" #sa_duration="ngModel" name="sa_duration" id="sa_duration" [(ngModel)]="song.duration" class="form-control" placeholder="00:00:00" value="" required>
+								<span *ngIf="!sa_duration.valid && sa_duration.touched" class="text-danger">
+									Duración requerida
+								</span>
+							</p>
+							<button [disabled]="!songAddForm.form.valid" type="submit" class="btn btn-dark" value="{{legendButton}}">{{legendButton}}</button>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -26,6 +26,7 @@ export class AlbumAddComponent implements OnInit {
 	public album: Album;
 	public identity: any;
 	public token: string;
+	public listDescription: Array<String>;
 	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
@@ -38,7 +39,8 @@ export class AlbumAddComponent implements OnInit {
 		private _router: Router,
 		private _authenticationService: AuthenticationService,
 		private _userService: UserService,
-		private _albumService: AlbumService
+		private _albumService: AlbumService,
+		private _artistService: ArtistService
 	) {
 		this.title = "Crear álbum";
 		this.identity = this._userService.getIdentity();
@@ -54,6 +56,39 @@ export class AlbumAddComponent implements OnInit {
 
 	ngOnInit(): void {
 		console.log("album-add.component cargado...");
+
+		// Obtener artísta
+		this.getArtist();
+	}
+
+	public getArtist() {
+		this._route.params.forEach((params: Params) => {
+			let id = params['artist'];
+			
+			this._artistService.getArtist(this.token, id).subscribe(
+				(res : any) => {
+					if(!res.artist) {
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-danger";
+					} else {
+						this.artist = res.artist;
+						this.listDescription = this.getListDescription();
+					}
+				},
+				(err : any) => {
+					var errorAddArtist = <any>err;
+					
+					if(errorAddArtist != null) {
+						this.alertMessage = err.error.message;
+						this.typeMessage = "alert-danger";
+					}
+				}
+			);
+		});
+	}
+	
+	public getListDescription() {
+		return this.artist.description.replace(" ", "").split(",");
 	}
 
 	public onSubmit() {

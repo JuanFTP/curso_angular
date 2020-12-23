@@ -27,6 +27,11 @@ html, body {
 	background-color: #E39631;
 }
 
+.bg-main-blur {
+	background: rgba(227, 150, 49, 0.25);
+	backdrop-filter: blur(8px);
+}
+
 .bg-sidebar {
 	background-color: #EEEEEE;
 }
