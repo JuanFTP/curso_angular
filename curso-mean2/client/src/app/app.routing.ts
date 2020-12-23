@@ -22,6 +22,7 @@ import { AlbumListComponent } from './components/album-list.component';
 import { SongListComponent } from './components/song-list.component';
 import { SearchComponent } from './components/search.component';
 import { RecentComponent } from './components/recent.component';
+import { AppComponent } from './app.component';
 
 const appRouters: Routes = [
 	{
