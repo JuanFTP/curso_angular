@@ -31,6 +31,122 @@ html, body {
 	background-color: #EEEEEE;
 }
 
+/* SECTIONS OF PLAYER */
+router-outlet {
+	background-color: #000;
+	width: 100%;
+}
+
+player {
+	display: block;
+	width: 100%;
+	height: 76px;
+	max-height: 76px;
+	background: rgba(68, 68, 68, 0.5);
+	backdrop-filter: blur(16px);
+	position: fixed;
+	bottom: 0;
+	z-index: 10;
+}
+
+	player .image-album {
+		width: 60px;
+	}
+
+	.player-song-title,
+	.player-song-artist,
+	.player-song-artist a,
+	.player-song-progressbar {
+		display: block;
+	}
+
+	.player-song-title {
+		font-size: 16px;
+		line-height: 16px;
+		margin-bottom: 4px;
+	}
+
+	.player-song-artist {
+		font-size: 14px;
+		line-height: 14px;
+		margin-bottom: 4px
+	}
+
+	.player-song-artist a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.player-song-progressbar {
+		height: 6px;
+		width: 100%;
+		height: 6px;
+		border-radius: 3px;
+		background-color: rgba(68, 68, 68, 0.25);
+		cursor: pointer;
+	}
+
+		.player-song-progressbar .player-song-progressbar-filled {
+			height: inherit;
+			border-radius: inherit;
+			width: 45%;
+			float: left;
+			background-color: #E39631;
+		}
+
+		.player-song-progressbar .player-song-progressbar-filled .player-song-progressbar-point {
+			height: inherit;
+			width: 6px;
+			float: right;
+			border-radius: inherit;
+			background-color: #fff;
+		}
+	
+	.controls {
+		display: block;
+		width: 100%;
+		color: #343A40;
+	}
+
+		.controls .options {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.controls .options a {
+			display: inline;
+			font-size: 20px;
+			line-height: 24px;
+			height: 24px;
+			width: 24px;
+			text-align: center;
+			text-decoration: none;
+			color: inherit;
+			margin: 2px 6px;
+			-webkit-transition: all ease-in 250ms;
+			-o-transition: all ease-in 250ms;
+			transition: all ease-in 250ms;
+			user-select: none;
+		}
+
+		.controls .options a:hover {
+			color: #E39631;
+		}
+
+		.controls .options a.active {
+			color: #E39631;
+		}
+
+		.controls .options a.active:hover {
+			color: #343A40;
+		}
+
+.space-bar-player {
+	height: 76px;
+}
+
 /* NAVIGATION */
 .navigation {
 	-webkit-transition: all ease-in 250ms;
