@@ -12,7 +12,10 @@ function getAlbum(req, res) {
 	var albumId = req.params.id;
 
 	// Conseguir todos los datos del artista que creó el album
-	Album.findById(albumId).populate({path: 'artist'}).exec((err, album) => {
+	Album.findById(albumId).populate({
+		path: 'artist',
+		model: 'Artist'
+	}).exec((err, album) => {
 		if(err) {
 			res.status(500).send({message: 'Error en la petición'});
 		} else {

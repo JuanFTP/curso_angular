@@ -29,6 +29,7 @@ export class AlbumEditComponent implements OnInit {
 	public identity: any;
 	public token: string;
 	public filesToUpload: Array<File>;
+	public listDescription: Array<String>;
 	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
@@ -76,6 +77,8 @@ export class AlbumEditComponent implements OnInit {
 						this._router.navigate(['/']);
 					} else {
 						this.album = res.album;
+						this.artist = res.album.artist;
+						this.listDescription = this.getListDescription();
 					}
 				},
 				(err : any) => {
@@ -88,6 +91,10 @@ export class AlbumEditComponent implements OnInit {
 				}
 			);
 		});
+	}
+
+	public getListDescription() {
+		return this.artist.description.replace(" ", "").split(",");
 	}
 
 	public fileChangeEvent(fileInput: any) {
