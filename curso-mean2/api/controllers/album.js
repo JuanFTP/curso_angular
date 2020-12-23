@@ -59,7 +59,7 @@ function getAllAlbums(req, res) {
 	var page = (req.params.page != null ? req.params.page : 1);
 	var itemsPerPage = 12;
 	
-	Album.find().sort('name').populate({path: 'artist'}).paginate(page, itemsPerPage, (err, albums, total) => {
+	Album.find().sort('title').populate({path: 'artist'}).paginate(page, itemsPerPage, (err, albums, total) => {
 		if(err) {
 			res.status(500).send({message: 'Error en la paginación'});
 		} else {

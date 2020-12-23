@@ -3,24 +3,24 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GLOBAL } from './../services/global';
 import { UserService } from './../services/user.service';
-import { Album } from './../models/album';
+import { Song } from './../models/song';
 import { AuthenticationService } from '../services/authentication.service';
-import { AlbumService } from '../services/album.service';
+import { SongService } from '../services/song.service';
 
 @Component({
-	selector: 'album-list',
-	templateUrl: './../views/album-list.html',
+	selector: 'song-list',
+	templateUrl: './../views/song-list.html',
 	providers: [
 		AuthenticationService,
 		UserService,
-		AlbumService
+		SongService
 	]
 })
 
-export class AlbumListComponent implements OnInit {
+export class SongListComponent implements OnInit {
 	public title: string;
 	public url: string;
-	public albums: Album[];
+	public songs: Song[];
 	public identity: any;
 	public token: string;
 	// Variables para mensages
@@ -35,22 +35,23 @@ export class AlbumListComponent implements OnInit {
 		private _router: Router,
 		private _authenticationService: AuthenticationService,
 		private _userService: UserService,
-		private _albumService: AlbumService
+		private _songService: SongService
 	) {
-		this.title = "Álbumes";
+		this.title = "Canciones";
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
 	}
 
-	ngOnInit(): void {
-		console.log("album-list.component cargado...");
 
-		// Obtener listado de álbumes
-		this.getAlbums();
+	ngOnInit(): void {
+		console.log("song-list.component cargado...");
+
+		// Obtener listado de canciones
+		this.getSongs();
 	}
 
-	public getAlbums() {
+	public getSongs() {
 		this._route.params.forEach((params: Params) => {
 			let page = +params['page'];
 			if(!page) {
@@ -59,19 +60,19 @@ export class AlbumListComponent implements OnInit {
 				this.prev_page = ((page-1 >= 1) ? (page-1) : 1);
 				this.next_page = page+1;
 				
-				this._albumService.getAllAlbums(this.token, page).subscribe(
+				this._songService.getAllSongs(this.token, page).subscribe(
 					(res : any) => {
-						if(!res.albums && this._authenticationService.isUser(this.identity)) {
+						if(!res.songs && this._authenticationService.isUser(this.identity)) {
 							this._router.navigate(['/']);
 						} else {
-							if(!res.albums) {
+							if(!res.songs) {
 								this.alertMessage = res.message;
 								this.typeMessage = "alert-danger";
 							} else {
-								if(res.albums.length == 0) {
-									this._router.navigate(['/all-albums/', page-1]);
+								if(res.songs.length == 0) {
+									this._router.navigate(['/songs/', page-1]);
 								} else {
-									this.albums = res.albums;
+									this.songs = res.songs;
 								}
 							}
 						}
@@ -87,26 +88,5 @@ export class AlbumListComponent implements OnInit {
 				);
 			}
 		});
-	}
-	
-	public deleteAlbumConfirm(id: any) {
-		this._albumService.deleteAlbum(this.token, id).subscribe(
-			(res : any) => {
-				if(!res.artist) {
-					this.alertMessage = res.message;
-					this.typeMessage = "alert-danger";
-				} else {
-					this.getAlbums();
-				}
-			},
-			(err : any) => {
-				var errorResult = <any>err;
-				
-				if(errorResult != null) {
-					this.alertMessage = err.error.message;
-					this.typeMessage = "alert-danger";
-				}
-			}
-		);
 	}
 }

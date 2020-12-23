@@ -19,6 +19,8 @@ import { AlbumDetailComponent } from './components/album-detail.component';
 import { SongAddComponent } from './components/song-add.component';
 import { SongEditComponent } from './components/song-edit.component';
 import { AlbumListComponent } from './components/album-list.component';
+import { SongListComponent } from './components/song-list.component';
+import { SearchComponent } from './components/search.component';
 
 const appRouters: Routes = [
 	{
@@ -27,6 +29,7 @@ const appRouters: Routes = [
 		pathMatch: 'full'
 	},
 	{ path: 'home', component: HomeComponent },
+	{ path: 'search', component: SearchComponent },
 	{ path: 'mis-datos', component: UserEditComponent },
 	{ path: 'artists/:page', component: ArtistListComponent },
 	{ path: 'create-artist', component: ArtistAddComponent },
@@ -36,6 +39,7 @@ const appRouters: Routes = [
 	{ path: 'album/:id', component: AlbumDetailComponent },
 	{ path: 'all-albums/:page', component: AlbumListComponent },
 	{ path: 'edit-album/:id', component: AlbumEditComponent },
+	{ path: 'songs/:page', component: SongListComponent },
 	{ path: 'add-song/:album', component: SongAddComponent },
 	{ path: 'edit-song/:id', component: SongEditComponent }
 ];

@@ -53,6 +53,28 @@ function getSongs(req, res) {
 	})
 }
 
+function getAllSongs(req, res) {
+	var page = (req.params.page != null ? req.params.page : 1);
+	var itemsPerPage = 12;
+	
+	Song.find().sort('name').populate({path: 'album'}).paginate(page, itemsPerPage, (err, songs, total) => {
+		if(err) {
+			res.status(500).send({message: 'Error en la paginación'});
+		} else {
+			if(!songs) {
+				res.status(404).send({message: 'No hay canciones'});
+			} else {
+				res.status(200).send({
+					message: 'Canciones obtenidas correctamente',
+					itemsPerPage,
+					total_items: total,
+					songs: songs
+				});
+			}
+		}
+	});
+}
+
 function saveSong(req, res) {
 	var song = new Song();
 	var params = req.body;
@@ -157,6 +179,7 @@ function getSongFile(req, res) {
 
 module.exports = {
 	getSong,
+	getAllSongs,
 	saveSong,
 	getSongs,
 	updateSong,

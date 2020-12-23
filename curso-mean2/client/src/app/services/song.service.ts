@@ -51,6 +51,16 @@ export class SongService {
 		}
 	}
 
+	public getAllSongs(token: string, page: number) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization': token
+		});
+
+		return this._http.get(this.url+'/all-songs/'+page, { headers: headers })
+		.pipe(map(res => res));
+	}
+
 	public deleteSong(token: string, id: string) {
 		let headers = new HttpHeaders({
 			'Content-Type':'application/json',
