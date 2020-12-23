@@ -4,7 +4,31 @@
 		<div class="banner-home rounded pt-5 pb-5 pl-5 pr-5">
 			<h2 class="banner-title">Bienvenido a MusicFy!</h2>
 			<p class="banner-description">Navega para escuchar tu música preferida.</p>
-			<a href="#" class="btn btn-dark" [routerLink]="['/artists/1']">Ver artistas</a>
+			<!--<a href="#" class="btn btn-dark" [routerLink]="['/artists/1']">Ver artistas</a>-->
+		</div>
+		<br>
+		<div *ngIf="artists">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Artístas</h3>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div *ngIf="albums">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Álbumes</h3>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div *ngIf="songs">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Canciones</h3>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
