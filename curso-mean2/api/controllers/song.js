@@ -11,7 +11,10 @@ var Song = require('../models/song');
 function getSong(req, res) {
 	var songId = req.params.id;
 
-	Song.findById(songId).populate({path: 'album'}).exec((err, song) => {
+	Song.findById(songId).populate({
+		path: 'album',
+		populate: {path: 'artist'}
+	}).exec((err, song) => {
 		if(err) {
 			res.status(500).send({message: 'Error en la petición'});
 		} else {
@@ -22,6 +25,17 @@ function getSong(req, res) {
 			}
 		}
 	});
+	/*Song.findById(songId).populate({path: 'album'}).exec((err, song) => {
+		if(err) {
+			res.status(500).send({message: 'Error en la petición'});
+		} else {
+			if(!song) {
+				res.status(404).send({message: 'La canción no existe'});
+			} else {
+				res.status(200).send({message: 'Canción obtenida correctamente', song});
+			}
+		}
+	});*/
 }
 
 function getSongs(req, res) {

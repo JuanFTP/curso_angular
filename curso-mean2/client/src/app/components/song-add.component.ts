@@ -5,6 +5,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from './../services/user.service';
 import { Song } from './../models/song';
 import { SongService } from '../services/song.service';
+import { AlbumService } from '../services/album.service';
+import { Album } from '../models/album';
 
 @Component({
 	selector: 'song-add',
@@ -12,7 +14,8 @@ import { SongService } from '../services/song.service';
 	providers: [
 		AuthenticationService,
 		UserService,
-		SongService
+		SongService,
+		AlbumService
 	]
 })
 
@@ -21,6 +24,7 @@ export class SongAddComponent implements OnInit {
 	public url: string;
 	public identity: any;
 	public song: Song;
+	public album: Album;
 	public token: string;
 	// Variables para mensages
 	public alertMessage: string;
@@ -34,7 +38,8 @@ export class SongAddComponent implements OnInit {
 		private _router: Router,
 		private _authenticationService: AuthenticationService,
 		private _userService: UserService,
-		private _songService: SongService
+		private _songService: SongService,
+		private _albumService: AlbumService
 	) {
 		this.title = "Agregar canción";
 		this.identity = this._userService.getIdentity();
@@ -51,6 +56,34 @@ export class SongAddComponent implements OnInit {
 
 	ngOnInit(): void {
 		console.log("song-add.component cargado...");
+
+		// Obtener el álbum
+		this.getAlbum();
+	}
+
+	public getAlbum() {
+		this._route.params.forEach((params: Params) => {
+			let id = params['album'];
+
+			this._albumService.getAlbum(this.token, id).subscribe(
+				(res : any) => {
+					if(!res.album) {
+						this.alertMessage = res.message;
+						this.typeMessage = "alert-danger";
+					} else {
+						this.album = res.album;
+					}
+				},
+				(err : any) => {
+					var errorResult = <any>err;
+					
+					if(errorResult != null) {
+						this.alertMessage = err.error.message;
+						this.typeMessage = "alert-danger";
+					}
+				}
+			);
+		});
 	}
 
 	public onSubmit() {

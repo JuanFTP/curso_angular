@@ -1,18 +1,19 @@
 <div class="row pt-4 pb-4">
 	<div class="col-lg-12">
-		<div *ngIf="artist && artist != null" class="row">
+		<div *ngIf="album && album != null" class="row">
 			<div class="col-lg-6">
-				<h2>Artísta</h2>
+				<h2>Álbum</h2>
 				<div class="rounded bg-main-blur p-4">
 					<div class="row flex align-items-center">
 						<div class="col-lg-3">
-							<img class="img-fluid rounded" src="{{url + 'get-image-artist/' + artist.image}}" alt="">
+							<img class="img-fluid rounded" src="{{url + 'get-image-album/' + album.image}}" alt="">
 						</div>
 						<div class="col-lg-9">
-							<h6><a class="text-dark" href="#" [routerLink]="['/artist', artist._id]"><strong>{{artist.name}}</strong></a></h6>
-							<div *ngIf="listDescription">
-								<span *ngFor="let desc of listDescription" class="capsule text-white bg-dark">
-									{{desc}}
+							<h6><a class="text-dark" href="#" [routerLink]="['/album', album._id]"><strong>{{album.title}}</strong></a></h6>
+							<div>De <strong><a [routerLink]="['/artist/', album.artist._id]"  class="text-dark" href="#">{{album.artist.name}}</a></strong></div>
+							<div>
+								<span class="capsule text-white bg-dark">
+									{{album.year}}
 								</span>
 							</div>
 						</div>
@@ -20,10 +21,10 @@
 				</div>				
 			</div>
 		</div>
-		<br *ngIf="artist && artist != null">
+		<br *ngIf="album && album != null">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>{{title}}</h2>
+				<h3>{{title}}</h3>
 				<p>Completa los datos para agregar una nueva canción.</p>
 				<div class="row">
 					<div class="col-lg-6">

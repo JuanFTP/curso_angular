@@ -6,6 +6,8 @@ import { UserService } from './../services/user.service';
 import { Song } from './../models/song';
 import { SongService } from '../services/song.service';
 import { UploadService } from '../services/upload.service';
+import { AlbumService } from '../services/album.service';
+import { Album } from '../models/album';
 
 @Component({
 	selector: 'song-edit',
@@ -14,7 +16,8 @@ import { UploadService } from '../services/upload.service';
 		AuthenticationService,
 		UploadService,
 		UserService,
-		SongService
+		SongService,
+		AlbumService
 	]
 })
 
@@ -23,6 +26,7 @@ export class SongEditComponent implements OnInit {
 	public url: string;
 	public identity: any;
 	public song: Song;
+	public album: Album;
 	public token: string;
 	public filesToUpload: Array<File>;
 	// Variables para mensages
@@ -38,7 +42,8 @@ export class SongEditComponent implements OnInit {
 		private _authenticationService: AuthenticationService,
 		private _uploadService: UploadService,
 		private _userService: UserService,
-		private _songService: SongService
+		private _songService: SongService,
+		private _albumService: AlbumService
 	) {
 		this.title = "Editar canción";
 		this.identity = this._userService.getIdentity();
@@ -72,6 +77,9 @@ export class SongEditComponent implements OnInit {
 						this._router.navigate(['/']);
 					} else {
 						this.song = res.song;
+						
+						// Setear album de la canción
+						this.album = res.song.album;
 					}
 				},
 				(err : any) => {
