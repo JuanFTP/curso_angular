@@ -63,10 +63,6 @@ export class HomeComponent implements OnInit {
 		console.log("home.component cargado...");
 		// Cargar artistas
 		this.getArtists();
-		// Obtener albums
-		this.getAlbums();
-		// Obtener las canciones
-		this.getSongs();
 	}
 
 	public getArtists() {
@@ -80,8 +76,9 @@ export class HomeComponent implements OnInit {
 						this.artists = res.artists.slice(0, this.limitShow);
 					} else {
 						this.artists = res.artists;
+						// Cargar álbumes
+						this.getAlbums();
 					}
-					
 				}
 			},
 			(err : any) => {
@@ -106,6 +103,8 @@ export class HomeComponent implements OnInit {
 						this.albums = res.albums.slice(0, this.limitShow);
 					} else {
 						this.albums = res.albums;
+						// Cargar canciones
+						this.getSongs();
 					}
 				}
 			},
