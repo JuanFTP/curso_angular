@@ -81,4 +81,14 @@ export class SongService {
 		return this._http.put(this.url+'song/'+id, params, { headers: headers })
 		.pipe(map(res => res));
 	}
+	
+	// Funciones de utilidades generales
+	public getSongsHome(page: number) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json'
+		});
+
+		return this._http.get(this.url+'/songs-home/'+page, { headers: headers })
+		.pipe(map(res => res));
+	}
 }

@@ -47,7 +47,8 @@ export class AppComponent implements OnInit {
 					this.errorLogin = "El usuario no está correctamente logueado";
 				} else {
 					// Crear sesión en el LocalStorage para tener al usuario en sesión
-					localStorage.setItem('identity', JSON.stringify(identity));
+					//localStorage.setItem('identity', JSON.stringify(identity));
+					this._userService.setIdentity(identity);
 
 					// Conseguir el token para enviarselo a cada petición HTTP
 					this._userService.signup(this.user, 'true').subscribe(
@@ -59,7 +60,8 @@ export class AppComponent implements OnInit {
 								this.errorLogin = "El token no se ha generado";
 							} else {
 								// Crear sesión en el LocalStorage para tener al usuario en sesión
-								localStorage.setItem('token', token);
+								//localStorage.setItem('token', token);
+								this._userService.setToken(token);
 								this.user = new User('', '', '', '', '', 'ROLE_USER', '');
 							}
 						},
@@ -67,7 +69,7 @@ export class AppComponent implements OnInit {
 							var errorLogin = <any>err;
 							
 							if(errorLogin != null) {
-								this.errorLogin = err.error.message;
+								this.errorLogin = err.message;
 							}
 						}
 					);
@@ -77,16 +79,14 @@ export class AppComponent implements OnInit {
 				var errorLogin = <any>err;
 				
 				if(errorLogin != null) {
-					this.errorLogin = err.error.message;
+					this.errorLogin = err.message;
 				}
 			}
 		);
 	}
 
 	public logout() {
-		localStorage.removeItem('identity');
-		localStorage.removeItem('token');
-		localStorage.clear();
+		this._userService.logout();
 		this.identity = null;
 		this.token = null;
 		this._router.navigate(['/']);
@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
 				var errorLogin = <any>err;
 				
 				if(errorLogin != null) {
-					this.alertRegister = err.error.message;
+					this.alertRegister = err.message;
 					this.typeRegisterMessage = "alert-danger";
 				}
 			}

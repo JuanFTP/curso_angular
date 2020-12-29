@@ -65,4 +65,14 @@ export class ArtistService {
 		return this._http.delete(this.url+'/artist/'+id, { headers: headers })
 		.pipe(map(res => res));
 	}
+
+	// Funciones de utilidades generales
+	public getArtistsHome(page: number) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json'
+		});
+
+		return this._http.get(this.url+'/artists-home/'+page, { headers: headers })
+		.pipe(map(res => res));
+	}
 }	

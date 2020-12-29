@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
-	// Página defecto de las solicitudes
+	// Límite de elementos a mostrar, máx 12
 	public page: number;
 	public limitShow: number;
 
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	public getArtists() {
-		this._artistService.getArtists(this.token, this.page).subscribe(
+		this._artistService.getArtistsHome(this.page).subscribe(
 			(res : any) => {
 				if(!res.artists) {
 					this.alertMessage = res.message;
@@ -76,9 +76,10 @@ export class HomeComponent implements OnInit {
 						this.artists = res.artists.slice(0, this.limitShow);
 					} else {
 						this.artists = res.artists;
-						// Cargar álbumes
-						this.getAlbums();
 					}
+
+					// Cargar álbumes
+					this.getAlbums();
 				}
 			},
 			(err : any) => {
@@ -93,7 +94,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	public getAlbums() {
-		this._albumService.getAllAlbums(this.token, this.page).subscribe(
+		this._albumService.getAlbumsHome(this.page).subscribe(
 			(res : any) => {
 				if(!res.albums) {
 					this.alertMessage = res.message;
@@ -103,9 +104,10 @@ export class HomeComponent implements OnInit {
 						this.albums = res.albums.slice(0, this.limitShow);
 					} else {
 						this.albums = res.albums;
-						// Cargar canciones
-						this.getSongs();
 					}
+
+					// Cargar canciones
+					this.getSongs();
 				}
 			},
 			(err : any) => {
@@ -120,7 +122,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	public getSongs() {
-		this._songService.getAllSongs(this.token, this.page).subscribe(
+		this._songService.getSongsHome(this.page).subscribe(
 			(res : any) => {
 				if(!res.songs) {
 					this.alertMessage = res.message;

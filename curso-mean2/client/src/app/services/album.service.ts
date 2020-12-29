@@ -81,4 +81,14 @@ export class AlbumService {
 		return this._http.delete(this.url+'album/'+id, {headers: headers})
 		.pipe(map(res => res));
 	}
+
+	// Funciones de utilidades generales
+	public getAlbumsHome(page: number) {
+		let headers = new HttpHeaders({
+			'Content-Type':'application/json'
+		});
+
+		return this._http.get(this.url+'/albums-home/'+page, { headers: headers })
+		.pipe(map(res => res));
+	}
 }

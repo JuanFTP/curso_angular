@@ -47,8 +47,22 @@ export class UserService {
 		.pipe(map(res => res));
 	}
 
+	public logout() {
+		sessionStorage.removeItem('identity');
+		sessionStorage.removeItem('token');
+		sessionStorage.clear();
+	}
+
+	public setIdentity(identity:any) {
+		sessionStorage.setItem('identity', JSON.stringify(identity));
+	}
+
+	public setToken(token:string) {
+		sessionStorage.setItem('token', token);
+	}
+
 	public getIdentity() {
-		let identity = JSON.parse(localStorage.getItem('identity'));
+		let identity = JSON.parse(sessionStorage.getItem('identity'));
 		if(identity != "undefined") {
 			this.identity = identity;
 		} else {
@@ -59,7 +73,7 @@ export class UserService {
 	}
 
 	public getToken() {
-		let token = localStorage.getItem('token');
+		let token = sessionStorage.getItem('token');
 		if(token != "undefined") {
 			this.token = token;
 		} else {
