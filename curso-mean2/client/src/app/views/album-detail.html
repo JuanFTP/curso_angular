@@ -39,7 +39,7 @@
 							</thead>
 							<tbody>
 							  <tr *ngFor="let song of songs">
-								<th scope="row"><a href="#" class="text-decoration-none text-dark"><i class="fas fa-play"></i></a></th>
+								<th scope="row"><a (click)="loadSong(song)" class="text-decoration-none text-dark"><i class="fas fa-play"></i></a></th>
 								<td>{{song.name}}</td>
 								<td>{{song.duration}}</td>
 								<td *ngIf="identity && identity.role == 'ROLE_ADMIN'" scope="col">

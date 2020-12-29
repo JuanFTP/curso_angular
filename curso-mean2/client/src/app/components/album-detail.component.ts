@@ -31,6 +31,7 @@ export class AlbumDetailComponent implements OnInit {
 	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
+	// Variables del player
 
 	public constructor(
 		private _route: ActivatedRoute,
@@ -103,7 +104,6 @@ export class AlbumDetailComponent implements OnInit {
 			);
 		});
 	}
-
 	
 	public deleteSongConfirm(id: any) {
 		this._songService.deleteSong(this.token, id).subscribe(
@@ -126,5 +126,11 @@ export class AlbumDetailComponent implements OnInit {
 				}
 			}
 		);
+	}
+
+	// Métodos para el player
+	// Cargar archivo en el Storage
+	public loadSong(song: Song):void {
+		// Cargar en memoria el objeto son a cargar
 	}
 }

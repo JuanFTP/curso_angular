@@ -1,3 +1,5 @@
+import { Album } from "./album";
+
 export class Song {
 	// Se definen de este modo ya que se le "dice" que se declaren e inicializen
 	constructor(
@@ -6,6 +8,6 @@ export class Song {
 		public name: string,
 		public duration: string,
 		public file: string,
-		public album: string
+		public album: Album
 	) {}
 }

@@ -45,7 +45,7 @@ export class SongAddComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.song = new Song('', '', '', '', '', '');
+		this.song = new Song('', '', '', '', '', null);
 		this.isEdit = false;
 		this.legendButton = "Guardar";
 

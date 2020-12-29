@@ -13,7 +13,11 @@ function getSong(req, res) {
 
 	Song.findById(songId).populate({
 		path: 'album',
-		populate: {path: 'artist'}
+		model: 'Album',
+		populate: {
+			path: 'artist',
+			model: 'Artist'
+		}
 	}).exec((err, song) => {
 		if(err) {
 			res.status(500).send({message: 'Error en la petición'});

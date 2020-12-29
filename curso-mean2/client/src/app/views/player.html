@@ -2,11 +2,11 @@
 	<div class="container-fluid">
 		<div class="row flex align-items-center">
 			<div class="col-lg-1 col-md-2 text-center">
-				<img class="image-album img-fluid rounded" src="{{url + '/get-image-album/5HifqDvtIu6Z6GXmzoMxq-X0.jpg'}}" alt="">
+				<img id="player-song-image" class="image-album img-fluid rounded" src="{{playerSongImage}}" alt="">
 			</div>
 			<div class="col-lg-9 col-md-7">
-				<span class="player-song-title"><strong>Título de la canción</strong></span>
-				<span class="player-song-artist"><a href="#">Artísta</a></span>
+				<span id="player-song-title" class="player-song-title"><strong>{{playerSongTitle}}</strong></span>
+				<span id="player-song-artist" class="player-song-artist"><a href="#">{{playerSongArtist}}</a></span>
 				<div class="player-song-progressbar">
 					<div class="player-song-progressbar-filled">
 						<div class="player-song-progressbar-point"></div>

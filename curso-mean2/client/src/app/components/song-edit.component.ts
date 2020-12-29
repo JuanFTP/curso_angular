@@ -48,7 +48,7 @@ export class SongEditComponent implements OnInit {
 		this.title = "Editar canción";
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
-		this.song = new Song('', '', '', '', '', '');
+		this.song = new Song('', '', '', '', '', null);
 		this.url = GLOBAL.url;
 		this.isEdit = true;
 		this.legendButton = "Actualizar";

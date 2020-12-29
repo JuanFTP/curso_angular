@@ -49,7 +49,7 @@ export class AlbumEditComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
-		this.album = new Album('', '', '', '', '', '');
+		this.album = new Album('', '', '', '', '', null);
 		this.isEdit = true;
 		this.legendButton = "Actualizar";
 		
