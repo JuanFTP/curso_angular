@@ -8,6 +8,7 @@ import { Album } from '../models/album';
 import { Song } from '../models/song';
 import { AlbumService } from '../services/album.service';
 import { SongService } from '../services/song.service';
+import { PlayerService } from '../services/player.service';
 
 @Component({
 	selector: 'album-detail',
@@ -20,23 +21,26 @@ import { SongService } from '../services/song.service';
 	]
 })
 
-export class AlbumDetailComponent implements OnInit {
+export class AlbumDetailComponent implements OnInit {	
 	public title: string;
 	public url: string;
 	public album: Album;
 	public songs: Song[];
+	public song: Song;
 	public identity: any;
 	public token: string;
 	public listDescription: Array<String>;
 	// Variables para mensages
 	public alertMessage: string;
 	public typeMessage: string = "alert-danger";
+	public message: string;
 	// Variables del player
-
+	
 	public constructor(
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _authenticationService: AuthenticationService,
+		private _playerService: PlayerService,
 		private _userService: UserService,
 		private _albumService: AlbumService,
 		private _songService: SongService
@@ -53,7 +57,9 @@ export class AlbumDetailComponent implements OnInit {
 
 	ngOnInit(): void {
 		console.log("album-detail.component cargado...");
-
+		this._playerService.song.subscribe((song) => {
+			this.song = song;
+		});
 		// Obtener album de la base de datos
 		this.getAlbum();
 	}
@@ -128,9 +134,7 @@ export class AlbumDetailComponent implements OnInit {
 		);
 	}
 
-	// Métodos para el player
-	// Cargar archivo en el Storage
-	public loadSong(song: Song):void {
-		// Cargar en memoria el objeto son a cargar
+	public loadSong(song: Song) {
+		this._playerService.setSong(song);
 	}
 }

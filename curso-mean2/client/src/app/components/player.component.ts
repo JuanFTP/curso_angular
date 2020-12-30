@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ignoreElements } from 'rxjs/operators';
 import { Song } from '../models/song';
 import { GLOBAL } from '../services/global';
 import { PlayerService } from '../services/player.service';
@@ -7,7 +6,7 @@ import { PlayerService } from '../services/player.service';
 @Component({
 	selector: 'player',
 	templateUrl: './../views/player.html',
-	providers: [PlayerService]
+	providers: []
 })
 
 export class PlayerComponent implements OnInit {
@@ -17,33 +16,44 @@ export class PlayerComponent implements OnInit {
 	public playerSongTitle: any;
 	public playerSongArtist: any;
 
+	public message: string;
+
 	public constructor(
-		private _playerService:PlayerService
+		private _playerService: PlayerService
 	) {
 		this.url = GLOBAL.url;
-		this.song = new Song('', '' ,'' ,'' ,'' , null);
+		
+		// Valores del reproductor por defecto
+		this.playerSongImage = "5HifqDvtIu6Z6GXmzoMxq-X0.jpg";
+		this.playerSongTitle = "Ninguna canción seleccionada";
+		this.playerSongArtist = "Sin artísta";
 	}
 
 	public ngOnInit() {
 		console.log("player.component cargado...");
 
-		// Obtener el objeto de la persistencia
-		this.verifySongLoaded();
+		this._playerService.song.subscribe((song) => {
+			this.song = song;
+			
+			// Verificar la existencia de contenido en el stored
+			this.getSongStored();
+		});
 	}
 
-	public verifySongLoaded() {
-		if(this._playerService.isLoaded()) {
-			this.song = this._playerService.getSong();
-
-			this.playerSongImage = this.url+"get-image-album/"+this.song.album.image;
+	public getSongStored() {
+		this.song = this._playerService.getSong();
+		if(this.song) {
+			this.playerSongImage = this.song.album.image;
 			this.playerSongTitle = this.song.name;
 			this.playerSongArtist = this.song.album.artist.name;
 		}
 	}
 
-	// Cargar objeto para archivo
-	public loadPlayer(song: Song) {
-		// Llamar al servicio del player y guardar el elemento
-		this._playerService.loadSong(song);
+	public playSong() {
+		console.log("playSong");
+	}
+
+	public pauseSong() {
+		console.log("pauseSong");
 	}
 }

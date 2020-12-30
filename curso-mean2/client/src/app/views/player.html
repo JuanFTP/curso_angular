@@ -2,13 +2,13 @@
 	<div class="container-fluid">
 		<div class="row flex align-items-center">
 			<div class="col-lg-1 col-md-2 text-center">
-				<img id="player-song-image" class="image-album img-fluid rounded" src="{{playerSongImage}}" alt="">
+				<img id="player-song-image" class="image-album img-fluid rounded" src="{{url + 'get-image-album/' + playerSongImage}}" alt="">
 			</div>
 			<div class="col-lg-9 col-md-7">
 				<span id="player-song-title" class="player-song-title"><strong>{{playerSongTitle}}</strong></span>
 				<span id="player-song-artist" class="player-song-artist"><a href="#">{{playerSongArtist}}</a></span>
 				<div class="player-song-progressbar">
-					<div class="player-song-progressbar-filled">
+					<div id="progressbar-filled" class="player-song-progressbar-filled">
 						<div class="player-song-progressbar-point"></div>
 					</div>
 				</div>
@@ -16,11 +16,8 @@
 			<div class="col-lg-2 col-md-3">
 				<div class="controls">
 					<div class="options">
-						<a href="#"><i class="fas fa-random"></i></a>
-						<a href="#"><i class="fas fa-step-backward"></i></a>
-						<a href="#" class="active"><i class="fas fa-play"></i></a>
-						<a href="#"><i class="fas fa-step-forward"></i></a>
-						<a href="#"><i class="fas fa-redo"></i></a>
+						<a (click)="playSong()"><i class="fas fa-play"></i></a>
+						<a (click)="pauseSong()"><i class="fas fa-pause"></i></a>
 					</div>
 				</div>
 			</div>

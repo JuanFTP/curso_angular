@@ -1,43 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { GLOBAL } from './global';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { Song } from '../models/song';
+import { GLOBAL } from './global';
 
 @Injectable()
 export class PlayerService {
 	public url: string;
-	public song: Song;
 
-	public constructor(private _http: HttpClient) {
+	private songSource = new BehaviorSubject(new Song('', '' ,'' ,'' ,'', null));
+	public song = this.songSource.asObservable();
+
+	public constructor() {
 		this.url = GLOBAL.url;
 	}
 
-	// Métodos del player
-	// Verifica si hay una canción cargada en el storage
-	public isLoaded():boolean {
-		this.song = JSON.parse(localStorage.getItem('song'));
-		if(this.song) {
-			return true;
-		} else {
-			return false;
-		}
+	public setSong(song:Song) {
+		// Meter al storage
+		localStorage.setItem("song", JSON.stringify(song));
+		this.songSource.next(song);
 	}
 
-	// Carga el objeto en el local storage
-	public loadSong(song: Song):void {
-		let songToSet = JSON.stringify(song);
-
-		localStorage.setItem('song', songToSet);
-	}
-
-	// Retorna el objeto song del local storage
 	public getSong():Song {
-		if(this.isLoaded()) {
-			return this.song;
-		} else {
-			return null;
-		}
+		return JSON.parse(localStorage.getItem("song"));
 	}
 }

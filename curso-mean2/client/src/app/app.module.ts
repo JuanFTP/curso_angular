@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms'
 import { appRoutingProviders, routing } from './app.routing';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PlayerService } from './services/player.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
@@ -57,7 +58,10 @@ import { RecentComponent } from './components/recent.component';
 		HttpClientModule,
 		routing
 	],
-	providers: [appRoutingProviders],
+	providers: [
+		appRoutingProviders,
+		PlayerService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

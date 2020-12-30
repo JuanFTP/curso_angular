@@ -94,7 +94,7 @@ player {
 		.player-song-progressbar .player-song-progressbar-filled {
 			height: inherit;
 			border-radius: inherit;
-			width: 45%;
+			max-width: 100%;
 			float: left;
 			background-color: #E39631;
 		}
