@@ -37,16 +37,11 @@ html, body {
 }
 
 /* SECTIONS OF PLAYER */
-router-outlet {
-	background-color: #000;
-	width: 100%;
-}
-
 player {
 	display: block;
 	width: 100%;
-	height: 76px;
-	max-height: 76px;
+	height: 94px;
+	max-height: 94px;
 	background: rgba(255, 255, 255, 0.5);
 	backdrop-filter: blur(16px);
 	position: fixed;
@@ -55,7 +50,7 @@ player {
 }
 
 	player .image-album {
-		width: 60px;
+		width: 94px;
 	}
 
 	.player-song-title,
@@ -82,35 +77,25 @@ player {
 		color: inherit;
 	}
 
-	.player-song-progressbar {
-		height: 6px;
+	.player-song-area {
 		width: 100%;
-		height: 6px;
-		border-radius: 3px;
+		height: 24px;
+		border-radius: 12px;
 		background-color: rgba(68, 68, 68, 0.25);
 		cursor: pointer;
 	}
 
-		.player-song-progressbar .player-song-progressbar-filled {
+		.player-song-area audio {
+			display: block;
+			width: 100%;
 			height: inherit;
-			border-radius: inherit;
-			max-width: 100%;
-			float: left;
-			background-color: #E39631;
-		}
-
-		.player-song-progressbar .player-song-progressbar-filled .player-song-progressbar-point {
-			height: inherit;
-			width: 6px;
-			float: right;
-			border-radius: inherit;
-			background-color: #fff;
 		}
 	
 	.controls {
 		display: block;
 		width: 100%;
 		color: #343A40;
+		height: 100%;
 	}
 
 		.controls .options {
@@ -121,11 +106,11 @@ player {
 		}
 
 		.controls .options a {
+			height: 40px;
 			display: inline;
-			font-size: 20px;
-			line-height: 24px;
-			height: 24px;
-			width: 24px;
+			font-size: 16px;
+			line-height: 40px;
+			width: 40px;
 			text-align: center;
 			text-decoration: none;
 			color: inherit;
@@ -149,7 +134,7 @@ player {
 		}
 
 .space-bar-player {
-	height: 76px;
+	height: 94px;
 }
 
 /* NAVIGATION */
