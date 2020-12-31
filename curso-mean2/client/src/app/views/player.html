@@ -8,8 +8,8 @@
 				<span id="player-song-title" class="player-song-title"><strong>{{playerSongTitle}}</strong></span>
 				<span id="player-song-artist" class="player-song-artist"><a href="#">{{playerSongArtist}}</a></span>
 				<div class="player-song-area">
-					<audio id="player-controls" controls>
-						<source id="player-source" src="{{url + 'get-file-song/' + playerSongFile}}" type="audio/mpeg" />
+					<audio id="player-controls" preload="auto" controls>
+						<source id='player-source' src="" type='audio/mpeg' />
 					</audio>
 				</div>
 			</div>
@@ -18,8 +18,8 @@
 					<div class="options">
 						<a (click)="playSong()"><i class="fas fa-play"></i></a>
 						<a (click)="pauseSong()"><i class="fas fa-pause"></i></a>
-						<a (click)="volumeUp()"><i class="fas fa-volume-up"></i></a>
 						<a (click)="volumeDown()"><i class="fas fa-volume-down"></i></a>
+						<a (click)="volumeUp()"><i class="fas fa-volume-up"></i></a>
 					</div>
 				</div>
 			</div>

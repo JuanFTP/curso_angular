@@ -56,13 +56,16 @@ export class PlayerComponent implements OnInit {
 			this.playerSongFile = this.song.file;
 			this.playerSongControls = document.getElementById("player-controls");
 			this.playerSongSource = document.getElementById("player-source");
+
+			// Setear recurso
+			this.setSource();
 		}
 	}
 
 	public setSource() {
-		this.playerSongSource.setAttribute("src", this.playerSongFile);
+		this.playerSongSource.setAttribute('src', this.url+"get-file-song/"+this.playerSongFile);
 	}
-
+	
 	public playSong() {
 		this.playerSongControls.play();
 	}
@@ -75,7 +78,6 @@ export class PlayerComponent implements OnInit {
 		if(this.playerVolume < 1) {
 			this.playerVolume += 0.1;
 			this.playerSongControls.volume = this.playerVolume;
-			console.log(this.playerVolume);			
 		}
 	}
 
@@ -83,7 +85,6 @@ export class PlayerComponent implements OnInit {
 		if(this.playerVolume > 0.1) {
 			this.playerVolume -= 0.1;
 			this.playerSongControls.volume = this.playerVolume;
-			console.log(this.playerVolume);
 		}	
 	}
 }
