@@ -1,0 +1,156 @@
+Para ejecutar mongo DB se deben ejecutar los "exes" en el siguiente orden.
+Ruta: C:\Program Files\MongoDB\Server\4.4\bin
+1.- mongod.exe
+2.- mongo.exe
+
+Comandos generales
+- Muestra todas las bases de datos
+show dbs
+
+- Switchea a una bd
+use curso_node
+
+- Muestra todas las colecciones
+show collections
+
+- Muestra todo el contenido de una colección
+db.name.find()
+
+- Elimina todos los documentos de una colección
+db.users.remove({});
+
+- Borrar una base de datos
+use curso_node;
+db.dropDatabase();
+
+CREAR PROYECTOS
+Crear el proyecto en Node, moverse al directorio y hacer lo siguiente
+> npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help init` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+> package name: (curso-mean2)
+> version: (1.0.0)
+> description: Proyecto de API Rest con NodeJS
+> entry point: (index.js)
+> test command:
+> git repository:
+> keywords:
+> author: Juan Temich
+> license: (ISC) MIT
+About to write to D:\GIT\curso_desarrolloweb\curso-mean2\package.json:
+
+{
+  "name": "curso-mean2",
+  "version": "1.0.0",
+  "description": "Proyecto de API Rest con NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Temich",
+  "license": "MIT"
+}
+
+
+
+> Is this OK? (yes) yes
+
+> dir
+-> Este archivo es el importante -> 20/10/2020  05:52 p. m.               249 package.json
+
+DEPENDENCIAS (Se tiene que poner el --save para que se registre en el package.json)
+- Sirve para crear APIs REST
+npm install express --save
+
+- Sirve para encriptar las contraseñas de los usuarios
+npm install bcrypt-nodejs --save
+
+- Parseador solicitudes POST y GET a JSON
+npm install body-parser --save
+
+- Permite usar el protocolo HTTP para subir archivos por FILE
+npm install connect-multiparty --save
+
+- Autenticación con tokens
+npm install jwt-simple --save
+
+- Gestor de tiempos
+npm install moment --save
+
+- ORM Ayuda a trabajar con MongoDB dentro de NodeJS
+npm install mongoose --save
+
+- Paginaciones desde Mongo
+npm install mongoose-pagination --save
+
+- Cada que se haga un cambio en la API se re-lanza el servidor para actualizar la misma API (el "-dev" indica que la dependencia solo se instalará y ejecutará en DEV dado que en producción no se desplegará)
+npm install nodemon --save-dev
+
+COMO DESINSTALAR UNA DEPENDENCIA
+npm unistall mongoose --save
+
+INSTALAR LAS DEPENDENCIAS (Las contenidas dentro de package.json)
+npm install
+
+EJECUTAR EL Servidor
+npm start
+
+1.- Conectar la base de datos
+'use strict'
+
+var mongoose = require('mongoose');
+var app = require('./app');
+var port = process.env.PORT || 3997;
+
+mongoose.connect('mongodb://localhost:27017/curso_mean2', (err, res) => {
+	if(err) {
+		throw err;
+	} else {
+		console.log("La conexión a la base de datos está funcionando correctamente...");
+		app.listen(port, function() {
+			console.log("Servidor del API Rest de música escuchando en http://localhost:"+port);
+		});
+	}
+});
+
+2.- Crear la API Rest que obtendrá los datos de MongoDB
+'use-strict'
+
+var express = require('express');
+var bodyParser = require('body-parser');
+
+var app = express();
+
+//Cargar rutas
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+//Configurar cabeceras HTTP
+
+//Rutas base
+app.get('/pruebas', function (req, res) {
+	res.status(200).send({mensaje: "Hellow al curso..."});
+});
+
+module.exports = app;
+
+DEFINIR LOS MODELOS QUE TENDRÁ LA API REST
+MODELO: Representación de una entidad de la base de datos.
+
+CONTROLADOR
+Intermediario entre el usuario y la Base de Datos
+
+INSTALAR ANGULAR-CLI
+npm install -g @angular/cli
+ng new my-dream-app
+cd my-dream-app
+ng serve
